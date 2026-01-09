@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Reflexiones de nuestra vida</title>
-  <!-- Fuente manuscrita para el título -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #000000; /* Solo negro */
+      background-color: #000000;
       color: #ffffff;
       font-family: 'Georgia', serif;
       padding: 40px;
@@ -19,16 +18,38 @@
       text-align: center;
       font-family: 'Pacifico', cursive;
       font-size: 60px;
-      margin-bottom: 50px;
+      margin-bottom: 30px;
       color: #ffcc00;
       text-shadow: 2px 2px #333333;
     }
 
-    .contenido {
+    .menu {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .menu button {
+      background-color: #ffcc00;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+
+    .menu button:hover {
+      transform: scale(1.1);
+    }
+
+    .seccion {
       max-width: 700px;
       margin: auto;
-      line-height: 1.9; /* un poquito más espaciado */
-      font-size: 22px; /* letra un poquito más grande */
+      margin-bottom: 80px;
+      line-height: 1.9;
+      font-size: 22px;
       position: relative;
       z-index: 1;
     }
@@ -50,14 +71,13 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    p {
-      margin-bottom: 25px;
-    }
-
     .resaltar {
-      color: #ffcc00;
       font-weight: bold;
     }
+
+    .vida { color: #00ffff; }
+    .amor { color: #ff69b4; }
+    .crecimiento { color: #ffff00; }
 
     .top-btn {
       position: fixed;
@@ -78,46 +98,63 @@
     .top-btn:hover {
       transform: scale(1.1);
     }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #ffcc00;
+      font-weight: bold;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body>
 
 <h1 id="inicio">Reflexiones de nuestra vida</h1>
 
-<div class="contenido">
-  <p class="fade-in">1. A veces la <span class="resaltar">vida</span> no avisa, solo duele… y en ese dolor aprendemos a crecer.</p>
+<div class="menu">
+  <button onclick="document.getElementById('vida').scrollIntoView();">Vida</button>
+  <button onclick="document.getElementById('amor').scrollIntoView();">Amor</button>
+  <button onclick="document.getElementById('crecimiento').scrollIntoView();">Crecimiento</button>
+</div>
+
+<!-- SECCIÓN VIDA -->
+<div class="seccion" id="vida">
+  <h2 class="resaltar vida">Vida</h2>
+  <p class="fade-in">1. La <span class="resaltar vida">vida</span> es un aprendizaje constante, y cada caída nos enseña a levantarnos más fuertes.</p>
   <hr>
-  <p class="fade-in" style="animation-delay: 0.3s;">2. Este espacio es para quienes sienten <span class="resaltar">profundo</span> y buscan sentido en cada experiencia.</p>
+  <p class="fade-in" style="animation-delay: 0.3s;">2. Cada momento de <span class="resaltar vida">silencio</span> es una oportunidad para escucharte a ti mismo.</p>
   <hr>
-  <p class="fade-in" style="animation-delay: 0.6s;">3. La <span class="resaltar">felicidad</span> no se encuentra, se construye día a día con nuestras decisiones.</p>
+  <p class="fade-in" style="animation-delay: 0.6s;">3. Aprender a valorar lo simple hace que la <span class="resaltar vida">vida</span> sea más ligera.</p>
+</div>
+
+<!-- SECCIÓN AMOR -->
+<div class="seccion" id="amor">
+  <h2 class="resaltar amor">Amor</h2>
+  <p class="fade-in">1. El <span class="resaltar amor">amor</span> no se busca, se construye con respeto y sinceridad.</p>
   <hr>
-  <p class="fade-in" style="animation-delay: 0.9s;">4. Cada <span class="resaltar">error</span> es una lección que nos acerca a nuestra mejor versión.</p>
+  <p class="fade-in" style="animation-delay: 0.3s;">2. Amar también significa aprender a <span class="resaltar amor">soltar</span> lo que no te hace bien.</p>
   <hr>
-  <p class="fade-in" style="animation-delay: 1.2s;">5. Aprender a <span class="resaltar">soltar</span> lo que no sirve es el primer paso para avanzar.</p>
+  <p class="fade-in" style="animation-delay: 0.6s;">3. Cada gesto pequeño puede contener un <span class="resaltar amor">gran significado</span>.</p>
+</div>
+
+<!-- SECCIÓN CRECIMIENTO -->
+<div class="seccion" id="crecimiento">
+  <h2 class="resaltar crecimiento">Crecimiento</h2>
+  <p class="fade-in">1. Los <span class="resaltar crecimiento">errores</span> son escalones hacia la mejor versión de ti mismo.</p>
   <hr>
-  <p class="fade-in" style="animation-delay: 1.5s;">6. Los pequeños <span class="resaltar">momentos</span>, aunque silenciosos, son los que más nos transforman.</p>
+  <p class="fade-in" style="animation-delay: 0.3s;">2. Cada desafío te da <span class="resaltar crecimiento">fuerza</span> y claridad sobre quién eres.</p>
   <hr>
-  <p class="fade-in" style="animation-delay: 1.8s;">7. Escuchar nuestro <span class="resaltar">corazón</span> a veces duele, pero siempre nos guía hacia la verdad.</p>
-  <hr>
-  <p class="fade-in" style="animation-delay: 2.1s;">8. La <span class="resaltar">gratitud</span> convierte lo que tenemos en suficiente.</p>
-  <hr>
-  <p class="fade-in" style="animation-delay: 2.4s;">9. No existe <span class="resaltar">crecimiento</span> sin cambios, aunque den miedo.</p>
-  <hr>
-  <p class="fade-in" style="animation-delay: 2.7s;">10. Cada día es una nueva <span class="resaltar">oportunidad</span> para escribir nuestra historia.</p>
-  <hr>
-  <p class="fade-in" style="animation-delay: 3s;">11. La <span class="resaltar">esperanza</span> nos mantiene avanzando incluso en los días oscuros.</p>
-  <hr>
-  <p class="fade-in" style="animation-delay: 3.3s;">12. Las <span class="resaltar">emociones</span> nos enseñan quiénes somos y hacia dónde queremos ir.</p>
-  <hr>
-  <p class="fade-in" style="animation-delay: 3.6s;">13. Cada encuentro con otra persona puede dejarnos <span class="resaltar">lecciones</span> inesperadas.</p>
-  <hr>
-  <p class="fade-in" style="animation-delay: 3.9s;">14. La <span class="resaltar">paciencia</span> es la llave que abre las puertas que la prisa cierra.</p>
-  <hr>
-  <p class="fade-in" style="animation-delay: 4.2s;">15. Vivir el presente con <span class="resaltar">conciencia</span> nos da verdadera libertad.</p>
+  <p class="fade-in" style="animation-delay: 0.6s;">3. Crecer significa abrazar lo desconocido con <span class="resaltar crecimiento">confianza</span>.</p>
 </div>
 
 <!-- Botón volver arriba -->
 <button class="top-btn" onclick="document.getElementById('inicio').scrollIntoView();">⬆️ Arriba</button>
+
+<!-- FOOTER PROFESIONAL -->
+<footer>
+  Creado con ❤️ por David Nz | Reflexiona hoy, cambia mañana
+</footer>
 
 </body>
 </html>
