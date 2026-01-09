@@ -3,17 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <title>Reflexiones de nuestra vida</title>
+  <!-- Fuente manuscrita para el título -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
-    /* Fondo negro y fuente general */
+    /* Fondo con imagen tenue */
     body {
-      background-color: #000000;
+      background: url('fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
       color: #ffffff;
       font-family: 'Georgia', serif;
       padding: 40px;
+      margin: 0;
     }
 
-    /* Título principal con fuente tipo manuscrita */
+    /* Capa semi-transparente para mejorar legibilidad */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: -1;
+    }
+
+    /* Título grande tipo manuscrita */
     h1 {
       text-align: center;
       font-family: 'Pacifico', cursive;
@@ -23,14 +36,35 @@
       text-shadow: 2px 2px #333333;
     }
 
-    /* Caja de contenido */
+    /* Contenedor de reflexiones */
     .contenido {
       max-width: 700px;
       margin: auto;
       line-height: 1.8;
       font-size: 20px;
+      position: relative;
+      z-index: 1;
     }
 
+    /* Separadores */
+    hr {
+      border: 0;
+      height: 1px;
+      background: #555;
+      margin: 20px 0;
+    }
+
+    /* Efecto fade-in */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Párrafos */
     p {
       margin-bottom: 25px;
     }
@@ -41,16 +75,25 @@
 <h1>Reflexiones de nuestra vida</h1>
 
 <div class="contenido">
-  <p>1. A veces la vida no avisa, solo duele… y en ese dolor aprendemos a crecer.</p>
-  <p>2. Este espacio es para quienes sienten profundo y buscan sentido en cada experiencia.</p>
-  <p>3. La felicidad no se encuentra, se construye día a día con nuestras decisiones.</p>
-  <p>4. Cada error es una lección que nos acerca a nuestra mejor versión.</p>
-  <p>5. Aprender a soltar lo que no sirve es el primer paso para avanzar.</p>
-  <p>6. Los pequeños momentos, aunque silenciosos, son los que más nos transforman.</p>
-  <p>7. Escuchar nuestro corazón a veces duele, pero siempre nos guía hacia la verdad.</p>
-  <p>8. La gratitud convierte lo que tenemos en suficiente.</p>
-  <p>9. No existe crecimiento sin cambios, aunque den miedo.</p>
-  <p>10. Cada día es una nueva oportunidad para escribir nuestra historia.</p>
+  <p class="fade-in">1. A veces la vida no avisa, solo duele… y en ese dolor aprendemos a crecer.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 0.3s;">2. Este espacio es para quienes sienten profundo y buscan sentido en cada experiencia.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 0.6s;">3. La felicidad no se encuentra, se construye día a día con nuestras decisiones.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 0.9s;">4. Cada error es una lección que nos acerca a nuestra mejor versión.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 1.2s;">5. Aprender a soltar lo que no sirve es el primer paso para avanzar.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 1.5s;">6. Los pequeños momentos, aunque silenciosos, son los que más nos transforman.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 1.8s;">7. Escuchar nuestro corazón a veces duele, pero siempre nos guía hacia la verdad.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 2.1s;">8. La gratitud convierte lo que tenemos en suficiente.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 2.4s;">9. No existe crecimiento sin cambios, aunque den miedo.</p>
+  <hr>
+  <p class="fade-in" style="animation-delay: 2.7s;">10. Cada día es una nueva oportunidad para escribir nuestra historia.</p>
 </div>
 
 </body>
