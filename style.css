@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background-color: #0e0e0e;
+  color: #e6e6e6;
+  text-align: center;
+}
+
+header {
+  padding: 50px 20px;
+}
+
+header h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.2em;
+  color: #bdbdbd;
+}
+
+.contenido {
+  max-width: 700px;
+  margin: auto;
+  padding: 40px 20px;
+  line-height: 1.9;
+  font-size: 1.2em;
+}
+
+footer {
+  padding: 20px;
+  font-size: 0.9em;
+  color: #777;
+}
