@@ -276,3 +276,26 @@
 
 </body>
 </html>
+<!-- Contador de visitas elegante -->
+<div id="contador-visitas" style="color: white; font-size: 18px; text-align: center; margin-top: 30px;">
+  Cargando contador...
+</div>
+
+<script>
+// Contador de visitas usando un servicio gratuito
+const contador = document.getElementById("contador-visitas");
+
+// URL del servicio de contador gratuito
+const contadorURL = "https://www.freevisitorcounters.com/en/home/counter/123456/t/0";
+
+// Crear imagen para mostrar contador
+const img = document.createElement("img");
+img.src = contadorURL;
+img.alt = "Contador de visitas";
+img.style.height = "30px";
+img.style.verticalAlign = "middle";
+
+// Limpiar mensaje y agregar contador
+contador.innerHTML = "Visitas a la página: ";
+contador.appendChild(img);
+</script>
