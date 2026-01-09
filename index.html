@@ -3,19 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <title>Reflexiones de nuestra vida</title>
+
+  <!-- Fuente manuscrita para el título -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
   <style>
     body {
       margin: 0;
       padding: 40px;
-      font-family: 'Georgia', serif;
+      font-family: Georgia, serif;
       background-color: #000;
       color: #fff;
       overflow-x: hidden;
       scroll-behavior: smooth;
-      position: relative;
     }
 
+    /* ===== ANIMACIÓN DE ENTRADA GENERAL ===== */
+    .entrada {
+      opacity: 0;
+      transform: translateY(40px);
+      animation: entradaSuave 2.2s ease forwards;
+    }
+
+    @keyframes entradaSuave {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== FONDO DE PARTÍCULAS ===== */
     canvas {
       position: fixed;
       top: 0;
@@ -23,6 +40,7 @@
       z-index: 0;
     }
 
+    /* ===== TÍTULO ===== */
     h1 {
       text-align: center;
       font-family: 'Pacifico', cursive;
@@ -30,10 +48,11 @@
       margin-bottom: 30px;
       color: #ffcc00;
       text-shadow: 2px 2px #333;
-      z-index: 1;
       position: relative;
+      z-index: 1;
     }
 
+    /* ===== MENÚ ===== */
     .menu {
       text-align: center;
       margin-bottom: 50px;
@@ -53,14 +72,17 @@
       transition: transform 0.2s;
     }
 
-    .menu button:hover { transform: scale(1.1); }
+    .menu button:hover {
+      transform: scale(1.1);
+    }
 
+    /* ===== SECCIONES ===== */
     .seccion {
-      max-width: 95%;       /* deja 5% de espacio total a los lados */
-      padding: 0 2.5%;      /* 2.5% a cada lado */
+      max-width: 95%;
+      padding: 0 2.5%;
       margin: auto;
       line-height: 2.2;
-      font-size: 32px;      /* más grande */
+      font-size: 32px;
       position: relative;
       z-index: 1;
     }
@@ -72,138 +94,165 @@
       margin: 20px 0;
     }
 
-    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+    /* ===== ANIMACIÓN DE FRASES ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(25px);
+      animation: aparecer 1.2s ease forwards;
+    }
 
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== COLORES ===== */
     .resaltar { font-weight: bold; }
     .vida { color: #00ffff; }
     .amor { color: #ff69b4; }
     .crecimiento { color: #ffff00; }
 
+    /* ===== BOTÓN ARRIBA ===== */
     .top-btn {
-      position: fixed; bottom: 30px; right: 30px;
-      background-color: #ffcc00; color: #000; border: none;
-      padding: 12px 20px; border-radius: 10px; cursor: pointer;
-      font-weight: bold; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-      transition: transform 0.2s; z-index: 2;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #ffcc00;
+      color: #000;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 2;
+      transition: transform 0.2s;
     }
-    .top-btn:hover { transform: scale(1.1); }
 
-    footer {
-      text-align: center; margin-top: 50px; color: #ffcc00;
-      font-weight: bold; font-size: 18px; position: relative; z-index: 1;
+    .top-btn:hover {
+      transform: scale(1.1);
     }
 
-    /* ESTILO DE COMENTARIOS */
-    #comentarios { margin-top: 50px; position: relative; z-index: 1; }
-    #comentarios input, #comentarios button {
+    /* ===== COMENTARIOS ===== */
+    #comentarios {
+      margin-top: 50px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #comentarios input,
+    #comentarios button {
       padding: 10px;
       margin: 5px 0;
       border-radius: 8px;
       border: none;
       font-size: 18px;
     }
-    #comentarios button { background-color: #ffcc00; color: #000; cursor: pointer; font-weight: bold; }
-    #comentarios ul { list-style: none; padding: 0; margin-top: 20px; font-size: 28px; }
-    #comentarios li { margin-bottom: 10px; border-bottom: 1px solid #555; padding-bottom: 5px; }
+
+    #comentarios button {
+      background-color: #ffcc00;
+      color: #000;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #comentarios ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+      font-size: 28px;
+    }
+
+    #comentarios li {
+      margin-bottom: 10px;
+      border-bottom: 1px solid #555;
+      padding-bottom: 5px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      color: #ffcc00;
+      font-weight: bold;
+      font-size: 18px;
+      position: relative;
+      z-index: 1;
+    }
   </style>
 </head>
+
 <body>
 
 <canvas id="fondo"></canvas>
 
-<h1 id="inicio">Reflexiones de nuestra vida</h1>
+<div class="entrada">
 
-<div class="menu">
-  <button onclick="document.getElementById('vida').scrollIntoView();">Vida</button>
-  <button onclick="document.getElementById('amor').scrollIntoView();">Amor</button>
-  <button onclick="document.getElementById('crecimiento').scrollIntoView();">Crecimiento</button>
+  <h1 id="inicio">Reflexiones de nuestra vida</h1>
+
+  <div class="menu">
+    <button onclick="document.getElementById('vida').scrollIntoView()">Vida</button>
+    <button onclick="document.getElementById('amor').scrollIntoView()">Amor</button>
+    <button onclick="document.getElementById('crecimiento').scrollIntoView()">Crecimiento</button>
+  </div>
+
+  <div class="seccion" id="vida"><h2 class="resaltar vida">Vida</h2></div>
+  <div class="seccion" id="amor"><h2 class="resaltar amor">Amor</h2></div>
+  <div class="seccion" id="crecimiento"><h2 class="resaltar crecimiento">Crecimiento</h2></div>
+
+  <div class="seccion" id="comentarios">
+    <h2 class="resaltar">Deja tu reflexión 💭</h2>
+    <input type="text" id="inputComentario" placeholder="Escribe tu reflexión aquí..." size="50">
+    <button onclick="agregarComentario()">Añadir</button>
+    <ul id="listaComentarios"></ul>
+  </div>
+
+  <footer>Creado con ❤️ por David Nz | Reflexiona hoy, cambia mañana</footer>
+
 </div>
 
-<div class="seccion" id="vida"><h2 class="resaltar vida">Vida</h2></div>
-<div class="seccion" id="amor"><h2 class="resaltar amor">Amor</h2></div>
-<div class="seccion" id="crecimiento"><h2 class="resaltar crecimiento">Crecimiento</h2></div>
-
-<!-- SECCIÓN COMENTARIOS -->
-<div class="seccion" id="comentarios">
-  <h2 class="resaltar">Deja tu reflexión 💭</h2>
-  <input type="text" id="inputComentario" placeholder="Escribe tu reflexión aquí..." size="50">
-  <button onclick="agregarComentario()">Añadir</button>
-  <ul id="listaComentarios"></ul>
-</div>
-
-<button class="top-btn" onclick="document.getElementById('inicio').scrollIntoView();">⬆️ Arriba</button>
-
-<footer>Creado con ❤️ por David Nz | Reflexiona hoy, cambia mañana</footer>
+<button class="top-btn" onclick="document.getElementById('inicio').scrollIntoView()">⬆️ Arriba</button>
 
 <script>
-  // ==== FRASES ====
+  /* ===== FRASES ===== */
   const frasesVida = [
     "La vida es un aprendizaje constante, y cada caída nos enseña a levantarnos más fuertes.",
     "Cada momento de silencio es una oportunidad para escucharte a ti mismo.",
     "Aprender a valorar lo simple hace que la vida sea más ligera.",
     "La paciencia transforma los obstáculos en enseñanzas.",
-    "Lo que hoy parece un problema, mañana será un recuerdo de tu fortaleza.",
-    "Cada día es una nueva oportunidad para empezar de nuevo.",
-    "Las pequeñas decisiones construyen tu destino.",
-    "A veces la soledad es necesaria para reencontrarte.",
-    "Aceptar lo que no puedes cambiar trae paz.",
-    "Los recuerdos enseñan, las experiencias guían y la vida continúa.",
-    "Aprende a disfrutar del presente, el futuro llegará a su tiempo.",
-    "Cada reto es una lección disfrazada.",
-    "La gratitud convierte lo que tenemos en suficiente.",
-    "La humildad abre más puertas que la fuerza.",
-    "Cada amanecer nos recuerda que la vida es un regalo."
+    "Cada día es una nueva oportunidad para empezar de nuevo."
   ];
 
   const frasesAmor = [
     "El amor no se busca, se construye con respeto y sinceridad.",
     "Amar también significa aprender a soltar lo que no te hace bien.",
-    "Cada gesto pequeño puede contener un gran significado.",
-    "El respeto es la base de cualquier relación duradera.",
-    "La paciencia en el amor fortalece los vínculos.",
-    "Amar es celebrar los logros y sostener en las caídas.",
-    "Los recuerdos compartidos crean lazos que el tiempo no rompe.",
-    "Cada sonrisa construye confianza y cercanía.",
-    "Amar también es aprender de los errores y seguir adelante.",
     "Los detalles dicen más que mil palabras.",
     "La comprensión es el lenguaje más poderoso en el amor.",
-    "Amar es dar sin esperar nada a cambio.",
-    "La empatía fortalece cualquier relación.",
-    "El perdón sana más que la distancia.",
     "Cada abrazo sincero es un tesoro."
   ];
 
   const frasesCrecimiento = [
     "Los errores son escalones hacia la mejor versión de ti mismo.",
-    "Cada desafío te da fuerza y claridad sobre quién eres.",
-    "Crecer significa abrazar lo desconocido con confianza.",
     "La disciplina diaria es el camino hacia tus metas.",
-    "Aprender de cada experiencia te hace más sabio.",
-    "La resiliencia te permite levantarte incluso después de caer.",
-    "La curiosidad abre puertas que la comodidad cierra.",
     "El esfuerzo constante vence al talento sin disciplina.",
-    "Cada meta alcanzada es el impulso para ir por la siguiente.",
-    "Escucha, aprende y mejora cada día.",
-    "Las decisiones difíciles forjan tu carácter.",
-    "Los retos no son obstáculos, son oportunidades.",
-    "Cada esfuerzo pequeño suma para un gran cambio.",
-    "La confianza en ti mismo te lleva más lejos que cualquier guía externa.",
-    "Crecer es atreverse a ser la mejor versión de ti."
+    "Cada reto es una oportunidad disfrazada.",
+    "Crecer es atreverse a ser mejor."
   ];
 
-  // ==== MEZCLAR Y MOSTRAR ====
-  function mezclarArray(array) { return array.sort(() => Math.random() - 0.5); }
+  function mezclarArray(array) {
+    return array.sort(() => Math.random() - 0.5);
+  }
 
-  function mostrarFrases(idSeccion, frases) {
-    const cont = document.getElementById(idSeccion);
+  function mostrarFrases(id, frases) {
+    const cont = document.getElementById(id);
     mezclarArray([...frases]).forEach((fr, i) => {
-      const p = document.createElement('p');
-      p.className = 'fade-in';
-      p.style.animationDelay = `${i*0.3}s`;
-      p.textContent = `${i+1}. ${fr}`;
+      const p = document.createElement("p");
+      p.className = "fade-in";
+      p.style.animationDelay = `${i * 0.3}s`;
+      p.textContent = `${i + 1}. ${fr}`;
       cont.appendChild(p);
-      if(i < frases.length - 1){ cont.appendChild(document.createElement('hr')); }
+      if (i < frases.length - 1) cont.appendChild(document.createElement("hr"));
     });
   }
 
@@ -211,91 +260,64 @@
   mostrarFrases("amor", frasesAmor);
   mostrarFrases("crecimiento", frasesCrecimiento);
 
-  // ==== COMENTARIOS ====
-  const listaComentarios = document.getElementById('listaComentarios');
-  const inputComentario = document.getElementById('inputComentario');
+  /* ===== COMENTARIOS (localStorage) ===== */
+  const listaComentarios = document.getElementById("listaComentarios");
+  const inputComentario = document.getElementById("inputComentario");
 
-  let comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
+  let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
   comentarios.forEach(c => {
-    const li = document.createElement('li');
+    const li = document.createElement("li");
     li.textContent = c;
     listaComentarios.appendChild(li);
   });
 
   function agregarComentario() {
-    const text = inputComentario.value.trim();
-    if(text === "") return;
-    comentarios.push(text);
-    localStorage.setItem('comentarios', JSON.stringify(comentarios));
-    const li = document.createElement('li');
-    li.textContent = text;
+    const texto = inputComentario.value.trim();
+    if (!texto) return;
+    comentarios.push(texto);
+    localStorage.setItem("comentarios", JSON.stringify(comentarios));
+    const li = document.createElement("li");
+    li.textContent = texto;
     listaComentarios.appendChild(li);
     inputComentario.value = "";
   }
 
-  // ==== EFECTO PARTICULAS ====
-  const canvas = document.getElementById('fondo');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  /* ===== PARTÍCULAS ===== */
+  const canvas = document.getElementById("fondo");
+  const ctx = canvas.getContext("2d");
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
 
   const particulas = [];
-  const numPart = 80;
-
-  for(let i=0;i<numPart;i++){
+  for (let i = 0; i < 80; i++) {
     particulas.push({
-      x: Math.random()*canvas.width,
-      y: Math.random()*canvas.height,
-      r: Math.random()*2+1,
-      dx: (Math.random()-0.5)*0.5,
-      dy: (Math.random()-0.5)*0.5
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
     });
   }
 
-  function animar(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particulas.forEach(p=>{
+  function animar() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particulas.forEach(p => {
       ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle="rgba(255,255,255,0.6)";
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255,255,255,0.6)";
       ctx.fill();
-      p.x += p.dx; p.y += p.dy;
-      if(p.x<0||p.x>canvas.width)p.dx*=-1;
-      if(p.y<0||p.y>canvas.height)p.dy*=-1;
+      p.x += p.dx;
+      p.y += p.dy;
     });
     requestAnimationFrame(animar);
   }
   animar();
 
-  window.addEventListener('resize',()=>{
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  addEventListener("resize", () => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
   });
-
 </script>
 
 </body>
 </html>
-<!-- Contador de visitas elegante -->
-<div id="contador-visitas" style="color: white; font-size: 18px; text-align: center; margin-top: 30px;">
-  Cargando contador...
-</div>
-
-<script>
-// Contador de visitas usando un servicio gratuito
-const contador = document.getElementById("contador-visitas");
-
-// URL del servicio de contador gratuito
-const contadorURL = "https://www.freevisitorcounters.com/en/home/counter/123456/t/0";
-
-// Crear imagen para mostrar contador
-const img = document.createElement("img");
-img.src = contadorURL;
-img.alt = "Contador de visitas";
-img.style.height = "30px";
-img.style.verticalAlign = "middle";
-
-// Limpiar mensaje y agregar contador
-contador.innerHTML = "Visitas a la página: ";
-contador.appendChild(img);
-</script>
