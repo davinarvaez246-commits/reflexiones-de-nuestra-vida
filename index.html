@@ -6,12 +6,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #000000;
-      color: #ffffff;
-      font-family: 'Georgia', serif;
-      padding: 40px;
       margin: 0;
+      padding: 40px;
+      font-family: 'Georgia', serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
       scroll-behavior: smooth;
+      position: relative;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
     }
 
     h1 {
@@ -20,12 +29,16 @@
       font-size: 60px;
       margin-bottom: 30px;
       color: #ffcc00;
-      text-shadow: 2px 2px #333333;
+      text-shadow: 2px 2px #333;
+      z-index: 1;
+      position: relative;
     }
 
     .menu {
       text-align: center;
       margin-bottom: 50px;
+      position: relative;
+      z-index: 1;
     }
 
     .menu button {
@@ -40,16 +53,14 @@
       transition: transform 0.2s;
     }
 
-    .menu button:hover {
-      transform: scale(1.1);
-    }
+    .menu button:hover { transform: scale(1.1); }
 
     .seccion {
-      max-width: 100%;
-      padding: 0 40px;
+      max-width: 95%;       /* deja 5% de espacio total a los lados */
+      padding: 0 2.5%;      /* 2.5% a cada lado */
       margin: auto;
-      line-height: 1.9;
-      font-size: 26px;
+      line-height: 2.2;
+      font-size: 32px;      /* más grande */
       position: relative;
       z-index: 1;
     }
@@ -61,54 +72,45 @@
       margin: 20px 0;
     }
 
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeIn 1s forwards;
-    }
+    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
+    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
 
-    @keyframes fadeIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .resaltar {
-      font-weight: bold;
-    }
-
+    .resaltar { font-weight: bold; }
     .vida { color: #00ffff; }
     .amor { color: #ff69b4; }
     .crecimiento { color: #ffff00; }
 
     .top-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #ffcc00;
-      color: #000;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-      transition: transform 0.2s;
-      z-index: 10;
+      position: fixed; bottom: 30px; right: 30px;
+      background-color: #ffcc00; color: #000; border: none;
+      padding: 12px 20px; border-radius: 10px; cursor: pointer;
+      font-weight: bold; box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      transition: transform 0.2s; z-index: 2;
     }
-
-    .top-btn:hover {
-      transform: scale(1.1);
-    }
+    .top-btn:hover { transform: scale(1.1); }
 
     footer {
-      text-align: center;
-      margin-top: 50px;
-      color: #ffcc00;
-      font-weight: bold;
+      text-align: center; margin-top: 50px; color: #ffcc00;
+      font-weight: bold; font-size: 18px; position: relative; z-index: 1;
+    }
+
+    /* ESTILO DE COMENTARIOS */
+    #comentarios { margin-top: 50px; position: relative; z-index: 1; }
+    #comentarios input, #comentarios button {
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 8px;
+      border: none;
       font-size: 18px;
     }
+    #comentarios button { background-color: #ffcc00; color: #000; cursor: pointer; font-weight: bold; }
+    #comentarios ul { list-style: none; padding: 0; margin-top: 20px; font-size: 28px; }
+    #comentarios li { margin-bottom: 10px; border-bottom: 1px solid #555; padding-bottom: 5px; }
   </style>
 </head>
 <body>
+
+<canvas id="fondo"></canvas>
 
 <h1 id="inicio">Reflexiones de nuestra vida</h1>
 
@@ -118,28 +120,21 @@
   <button onclick="document.getElementById('crecimiento').scrollIntoView();">Crecimiento</button>
 </div>
 
-<!-- SECCIÓN VIDA -->
-<div class="seccion" id="vida">
-  <h2 class="resaltar vida">Vida</h2>
+<div class="seccion" id="vida"><h2 class="resaltar vida">Vida</h2></div>
+<div class="seccion" id="amor"><h2 class="resaltar amor">Amor</h2></div>
+<div class="seccion" id="crecimiento"><h2 class="resaltar crecimiento">Crecimiento</h2></div>
+
+<!-- SECCIÓN COMENTARIOS -->
+<div class="seccion" id="comentarios">
+  <h2 class="resaltar">Deja tu reflexión 💭</h2>
+  <input type="text" id="inputComentario" placeholder="Escribe tu reflexión aquí..." size="50">
+  <button onclick="agregarComentario()">Añadir</button>
+  <ul id="listaComentarios"></ul>
 </div>
 
-<!-- SECCIÓN AMOR -->
-<div class="seccion" id="amor">
-  <h2 class="resaltar amor">Amor</h2>
-</div>
-
-<!-- SECCIÓN CRECIMIENTO -->
-<div class="seccion" id="crecimiento">
-  <h2 class="resaltar crecimiento">Crecimiento</h2>
-</div>
-
-<!-- Botón volver arriba -->
 <button class="top-btn" onclick="document.getElementById('inicio').scrollIntoView();">⬆️ Arriba</button>
 
-<!-- FOOTER PROFESIONAL -->
-<footer>
-  Creado con ❤️ por David Nz | Reflexiona hoy, cambia mañana
-</footer>
+<footer>Creado con ❤️ por David Nz | Reflexiona hoy, cambia mañana</footer>
 
 <script>
   // ==== FRASES ====
@@ -197,31 +192,86 @@
     "Crecer es atreverse a ser la mejor versión de ti."
   ];
 
-  // ==== FUNCIÓN PARA MEZCLAR FRASES ====
-  function mezclarArray(array) {
-    return array.sort(() => Math.random() - 0.5);
-  }
+  // ==== MEZCLAR Y MOSTRAR ====
+  function mezclarArray(array) { return array.sort(() => Math.random() - 0.5); }
 
   function mostrarFrases(idSeccion, frases) {
-    const contenedor = document.getElementById(idSeccion);
-    const frasesMezcladas = mezclarArray([...frases]);
-    frasesMezcladas.forEach((frase, i) => {
-      const p = document.createElement("p");
-      p.className = "fade-in";
+    const cont = document.getElementById(idSeccion);
+    mezclarArray([...frases]).forEach((fr, i) => {
+      const p = document.createElement('p');
+      p.className = 'fade-in';
       p.style.animationDelay = `${i*0.3}s`;
-      p.innerHTML = `${i+1}. ${frase}`;
-      contenedor.appendChild(p);
-      if(i < frasesMezcladas.length - 1) {
-        const hr = document.createElement("hr");
-        contenedor.appendChild(hr);
-      }
+      p.textContent = `${i+1}. ${fr}`;
+      cont.appendChild(p);
+      if(i < frases.length - 1){ cont.appendChild(document.createElement('hr')); }
     });
   }
 
-  // ==== MOSTRAR FRASES ALEATORIAS ====
   mostrarFrases("vida", frasesVida);
   mostrarFrases("amor", frasesAmor);
   mostrarFrases("crecimiento", frasesCrecimiento);
+
+  // ==== COMENTARIOS ====
+  const listaComentarios = document.getElementById('listaComentarios');
+  const inputComentario = document.getElementById('inputComentario');
+
+  let comentarios = JSON.parse(localStorage.getItem('comentarios')) || [];
+  comentarios.forEach(c => {
+    const li = document.createElement('li');
+    li.textContent = c;
+    listaComentarios.appendChild(li);
+  });
+
+  function agregarComentario() {
+    const text = inputComentario.value.trim();
+    if(text === "") return;
+    comentarios.push(text);
+    localStorage.setItem('comentarios', JSON.stringify(comentarios));
+    const li = document.createElement('li');
+    li.textContent = text;
+    listaComentarios.appendChild(li);
+    inputComentario.value = "";
+  }
+
+  // ==== EFECTO PARTICULAS ====
+  const canvas = document.getElementById('fondo');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const particulas = [];
+  const numPart = 80;
+
+  for(let i=0;i<numPart;i++){
+    particulas.push({
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      r: Math.random()*2+1,
+      dx: (Math.random()-0.5)*0.5,
+      dy: (Math.random()-0.5)*0.5
+    });
+  }
+
+  function animar(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particulas.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle="rgba(255,255,255,0.6)";
+      ctx.fill();
+      p.x += p.dx; p.y += p.dy;
+      if(p.x<0||p.x>canvas.width)p.dx*=-1;
+      if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    });
+    requestAnimationFrame(animar);
+  }
+  animar();
+
+  window.addEventListener('resize',()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
 </script>
 
 </body>
