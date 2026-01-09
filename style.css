@@ -1,11 +1,18 @@
+/* ===== Estilo general ===== */
 body {
   margin: 0;
   font-family: Georgia, serif;
   background-color: #0e0e0e;
   color: #e6e6e6;
   text-align: center;
+
+  /* Animación única */
+  opacity: 0;
+  transform: translateY(25px);
+  animation: entradaSuave 2.8s ease-out forwards;
 }
 
+/* ===== Encabezado ===== */
 header {
   padding: 50px 20px;
 }
@@ -20,37 +27,29 @@ header p {
   color: #bdbdbd;
 }
 
+/* ===== Contenido ===== */
 .contenido {
-  max-width: 700px;
+  max-width: 95%;
   margin: auto;
   padding: 40px 20px;
   line-height: 1.9;
-  font-size: 1.2em;
+  font-size: 1.45em;
 }
 
+/* ===== Reflexiones ===== */
+.reflexion {
+  margin: 35px auto;
+}
+
+/* ===== Footer ===== */
 footer {
   padding: 20px;
   font-size: 0.9em;
   color: #777;
 }
-/* Animación suave al cargar la página */
-body {
-  animation: fadeIn 2.5s ease-in-out forwards;
-}
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.reflexion {
-  animation: subir 1.8s ease forwards;
-}
-
-@keyframes subir {
+/* ===== Animación única ===== */
+@keyframes entradaSuave {
   from {
     opacity: 0;
     transform: translateY(25px);
