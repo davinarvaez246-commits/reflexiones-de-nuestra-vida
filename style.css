@@ -33,3 +33,30 @@ footer {
   font-size: 0.9em;
   color: #777;
 }
+/* Animación suave al cargar la página */
+body {
+  animation: fadeIn 2.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.reflexion {
+  animation: subir 1.8s ease forwards;
+}
+
+@keyframes subir {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
