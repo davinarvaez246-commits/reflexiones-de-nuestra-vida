@@ -8,13 +8,23 @@
 
   <style>
     body {
-      margin: 0;
-      padding: 40px;
-      font-family: Georgia, serif;
-      background-color: #000;
-      color: #fff;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+  margin: 0;
+  padding: 40px;
+  font-family: Georgia, serif;
+  color: #fff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  /* Fondo animado */
+  background: linear-gradient(
+    -45deg,
+    #000000,
+    #050b1a,
+    #0a0f2c,
+    #000000
+  );
+  background-size: 400% 400%;
+  animation: fondoNocturno 25s ease infinite;
     }
 
     .entrada {
