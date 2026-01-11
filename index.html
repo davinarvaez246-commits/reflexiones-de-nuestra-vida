@@ -2,153 +2,158 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reflexiones de nuestra vida</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fuente para título estilo 𝐓𝐞𝐱𝐭𝐨 -->
-<link href="https://fonts.googleapis.com/css2?family=Antonio:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{
-    font-family:'Georgia', serif;
-    background: url('ruta-de-tu-imagen.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color:#fff;
-    overflow-x:hidden;
-    transition:background 1s;
-    position:relative;
-  }
+:root{
+  --neon:#a855f7;
+  --glow:rgba(168,85,247,.7);
+}
 
-  /* ===== TÍTULO MODIFICADO ===== */
-  h1{
-    font-family:'Antonio', sans-serif;
-    text-align:center;
-    font-size:60px;
-    margin:40px 0;
-    color:#fff; /* ahora es blanco */
-    text-shadow:2px 2px #222;
-  }
+*{box-sizing:border-box}
 
-  h2{text-align:center;font-size:36px;margin:30px 0;text-shadow:1px 1px #222;}
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  color:white;
+  background:#000;
+  overflow-x:hidden;
+}
 
-  /* ===== SECCIONES ===== */
-  .seccion{
-    max-width:90%;
-    margin:50px auto;
-    padding:25px;
-    line-height:2;
-    font-size:22px;
-    border:2px solid #b19cd9;
-    border-radius:15px;
-    box-shadow:0 0 15px #b19cd9,0 0 30px #b19cd9 inset;
-    background: rgba(0,0,0,0.5);
-    position:relative;
-    transition: box-shadow 0.5s;
-  }
-  .seccion:hover{box-shadow:0 0 30px #b19cd9,0 0 60px #b19cd9 inset;}
-  hr{border:0;height:1px;background:#555;margin:15px 0;}
+/* FONDO ANIMADO (SIN VIDEO PARA EVITAR ERROR) */
+.fondo{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, #6b21a8, transparent 40%),
+    radial-gradient(circle at 80% 80%, #9333ea, transparent 40%),
+    #000;
+  animation:mover 15s infinite alternate;
+  z-index:-2;
+}
 
-  /* ===== COLORES DE TEXTO ===== */
-  .resaltar{font-weight:bold;}
-  .vida{color:#00ffff;}
-  .amor{color:#ff69b4;}
-  .motivacion{color:#ffff00;}
-  .felicidad{color:#00ff7f;}
-  .soledad{color:#ff4500;}
-  .tristeza{color:#1e90ff;}
-  .reflexion{color:#dda0dd;}
-  .consejos{color:#ffa500;}
-  .superacion{color:#ff1493;}
-  .gratitud{color:#7fff00;}
+@keyframes mover{
+  from{filter:hue-rotate(0deg)}
+  to{filter:hue-rotate(30deg)}
+}
 
-  /* ===== FRASES ANIMADAS ===== */
-  .fade-in{opacity:0;transform:translateY(30px);animation:aparecer 1.2s forwards;}
-  @keyframes aparecer{to{opacity:1;transform:translateY(0);}}
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:-1;
+}
 
-  /* ===== ANIMACION NEON SCROLL ===== */
-  .neon{text-shadow:0 0 5px #b19cd9,0 0 10px #b19cd9,0 0 20px #b19cd9,0 0 40px #b19cd9;transition: all 0.5s ease;}
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-  /* ===== COMENTARIOS ===== */
-  #comentarios{margin-top:50px;}
-  #comentarios input,#comentarios button{padding:15px;margin:10px 0;font-size:18px;border-radius:10px;border:none;}
-  #comentarios button{background:#ffcc00;color:#000;cursor:pointer;font-weight:bold;}
-  #comentarios ul{list-style:none;margin-top:20px;font-size:20px;}
-  #comentarios li{margin-bottom:10px;border-bottom:1px solid #555;padding-bottom:5px;}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,6vw,80px);
+}
 
-  /* ===== RESPONSIVE ===== */
-  @media(max-width:768px){h1{font-size:48px;}h2{font-size:28px;}}
+.hero p{opacity:.85}
+
+/* SECCIONES */
+.bloque{
+  max-width:900px;
+  margin:120px auto;
+  padding:40px;
+  border-radius:20px;
+  backdrop-filter:blur(8px);
+}
+
+/* NEON SCROLL */
+.neon{
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.2s ease;
+}
+
+.neon.activo{
+  opacity:1;
+  transform:translateY(0);
+  box-shadow:0 0 35px var(--glow);
+  border:1px solid var(--neon);
+}
+
+/* GALERÍA */
+.galeria{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+}
+
+.galeria img{
+  height:180px;
+  border-radius:15px;
+  transition:.4s;
+}
+
+.galeria img:hover{
+  transform:scale(1.15);
+  box-shadow:0 0 25px var(--glow);
+}
+
+@media(max-width:768px){
+  .bloque{margin:80px 20px}
+  .galeria img{height:140px}
+}
 </style>
 </head>
+
 <body>
 
-<h1>Reflexiones de nuestra vida</h1>
+<div class="fondo"></div>
+<div class="overlay"></div>
 
-<!-- ===== SECCIONES ===== -->
-<div class="seccion" id="vida"><h2 class="resaltar vida">Vida</h2></div>
-<div class="seccion" id="amor"><h2 class="resaltar amor">Amor</h2></div>
-<div class="seccion" id="motivacion"><h2 class="resaltar motivacion">Motivación</h2></div>
-<div class="seccion" id="felicidad"><h2 class="resaltar felicidad">Felicidad</h2></div>
-<div class="seccion" id="soledad"><h2 class="resaltar soledad">Soledad</h2></div>
-<div class="seccion" id="tristeza"><h2 class="resaltar tristeza">Tristeza</h2></div>
-<div class="seccion" id="reflexion"><h2 class="resaltar reflexion">Reflexión</h2></div>
-<div class="seccion" id="consejos"><h2 class="resaltar consejos">Consejos</h2></div>
-<div class="seccion" id="superacion"><h2 class="resaltar superacion">Superación</h2></div>
-<div class="seccion" id="gratitud"><h2 class="resaltar gratitud">Gratitud</h2></div>
+<section class="hero neon">
+  <h1>Reflexiones de nuestra vida</h1>
+  <p>Un espacio para sentir, pensar y crecer</p>
+</section>
 
-<!-- ===== COMENTARIOS ===== -->
-<div class="seccion" id="comentarios">
-  <h2 class="resaltar">Deja tu reflexión 💭</h2>
-  <input type="text" id="inputComentario" placeholder="Escribe tu reflexión aquí..." size="50">
-  <button onclick="agregarComentario()">Añadir</button>
-  <ul id="listaComentarios"></ul>
-</div>
+<section class="bloque neon">
+  <h2>Vida</h2>
+  <p>La vida no se mide en tiempo, sino en momentos.</p>
+  <p>Cada día es una nueva oportunidad.</p>
+</section>
+
+<section class="bloque neon">
+  <h2>Amor</h2>
+  <p>Amar también es aprender a soltar.</p>
+  <p>El amor empieza por uno mismo.</p>
+</section>
+
+<section class="bloque neon">
+  <h2>Inspiración</h2>
+  <div class="galeria">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+    <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d">
+  </div>
+</section>
 
 <script>
-  // ===== FRASES Y ANIMACIONES =====
-  const secciones={
-    vida:["La vida es un aprendizaje constante...","Cada momento de silencio...","Aprender a valorar lo simple...","La paciencia transforma...","Cada día es una nueva oportunidad..."],
-    amor:["El amor no se busca, se construye...","Amar significa soltar lo que no te hace bien...","Cada gesto tiene valor...","El respeto es base de toda relación...","La paciencia fortalece vínculos..."],
-    motivacion:["Cada día es una nueva oportunidad...","Los retos nos hacen crecer...","La disciplina diaria fortalece...","Aprender de la experiencia...","Confía en ti mismo..."],
-    felicidad:["La felicidad está en lo simple...","Valora cada momento...","Comparte sonrisas...","Disfruta la naturaleza...","Sé agradecido..."],
-    soledad:["Aprender a estar solo es crecer...","La soledad nos enseña a escucharnos...","Reflexiona sobre tus emociones...","Descubre tu interior...","Acepta tu compañía..."],
-    tristeza:["La tristeza también enseña...","Permítete sentir...","El llanto libera...","Aprende de la experiencia...","Fortalece tu resiliencia..."],
-    reflexion:["Reflexiona cada día...","Piensa antes de actuar...","Aprende de tus errores...","Observa tu entorno...","Escucha tu interior..."],
-    consejos:["Escucha a otros...","Aprende algo nuevo...","Mantente positivo...","Comparte lo que sabes...","Sé generoso..."],
-    superacion:["Nunca te rindas...","Cada obstáculo es una oportunidad...","Confía en tu camino...","Cree en ti...","Avanza siempre..."],
-    gratitud:["Agradece cada momento...","Valora lo que tienes...","Comparte lo bueno...","Sé consciente...","Expresa tu gratitud..."]
-  };
+const elementos=document.querySelectorAll('.neon');
 
-  for(const id in secciones){
-    const cont=document.getElementById(id);
-    secciones[id].forEach((fr,i)=>{
-      const p=document.createElement("p");
-      p.className="fade-in neon";
-      p.style.animationDelay=`${i*0.2}s`;
-      p.textContent=`${i+1}. ${fr}`;
-      cont.appendChild(p);
-    });
-  }
-
-  /* ===== COMENTARIOS ===== */
-  const listaComentarios=document.getElementById("listaComentarios");
-  const inputComentario=document.getElementById("inputComentario");
-  let comentarios=JSON.parse(localStorage.getItem("comentarios"))||[];
-  comentarios.forEach(c=>{
-    const li=document.createElement("li");
-    li.textContent=c;
-    listaComentarios.appendChild(li);
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting) x.target.classList.add('activo');
   });
-  function agregarComentario(){
-    const text=inputComentario.value.trim();
-    if(!text) return;
-    comentarios.push(text);
-    localStorage.setItem("comentarios",JSON.stringify(comentarios));
-    const li=document.createElement("li");
-    li.textContent=text;
-    listaComentarios.appendChild(li);
-    inputComentario.value="";
-  }
+},{threshold:.25});
+
+elementos.forEach(el=>obs.observe(el));
 </script>
 
 </body>
