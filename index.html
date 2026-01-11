@@ -1,66 +1,160 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Reflexiones de nuestra vida</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Reflexiones de nuestra vida</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css">
+<style>
+:root{
+  --neon:#a855f7;
+  --glow:rgba(168,85,247,.7);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  color:white;
+  background:#000;
+  overflow-x:hidden;
+}
+
+/* FONDO ANIMADO (SIN VIDEO PARA EVITAR ERROR) */
+.fondo{
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 20%, #6b21a8, transparent 40%),
+    radial-gradient(circle at 80% 80%, #9333ea, transparent 40%),
+    #000;
+  animation:mover 15s infinite alternate;
+  z-index:-2;
+}
+
+@keyframes mover{
+  from{filter:hue-rotate(0deg)}
+  to{filter:hue-rotate(30deg)}
+}
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  z-index:-1;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(40px,6vw,80px);
+}
+
+.hero p{opacity:.85}
+
+/* SECCIONES */
+.bloque{
+  max-width:900px;
+  margin:120px auto;
+  padding:40px;
+  border-radius:20px;
+  backdrop-filter:blur(8px);
+}
+
+/* NEON SCROLL */
+.neon{
+  opacity:0;
+  transform:translateY(60px);
+  transition:1.2s ease;
+}
+
+.neon.activo{
+  opacity:1;
+  transform:translateY(0);
+  box-shadow:0 0 35px var(--glow);
+  border:1px solid var(--neon);
+}
+
+/* GALERÍA */
+.galeria{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+}
+
+.galeria img{
+  height:180px;
+  border-radius:15px;
+  transition:.4s;
+}
+
+.galeria img:hover{
+  transform:scale(1.15);
+  box-shadow:0 0 25px var(--glow);
+}
+
+@media(max-width:768px){
+  .bloque{margin:80px 20px}
+  .galeria img{height:140px}
+}
+</style>
 </head>
 
 <body>
 
-<!-- ===== FONDO EN VIDEO ===== -->
-<video class="video-bg" autoplay muted loop>
-  <source src="https://cdn.coverr.co/videos/coverr-mountain-landscape-1579/1080p.mp4" type="video/mp4">
-</video>
-
+<div class="fondo"></div>
 <div class="overlay"></div>
 
-<!-- ===== CONTENIDO ===== -->
-<main>
+<section class="hero neon">
+  <h1>Reflexiones de nuestra vida</h1>
+  <p>Un espacio para sentir, pensar y crecer</p>
+</section>
 
-  <section class="hero neon-scroll">
-    <h1>Reflexiones de nuestra vida</h1>
-    <p>Un espacio para sentir, pensar y crecer</p>
-  </section>
+<section class="bloque neon">
+  <h2>Vida</h2>
+  <p>La vida no se mide en tiempo, sino en momentos.</p>
+  <p>Cada día es una nueva oportunidad.</p>
+</section>
 
-  <!-- ===== SECCIONES ===== -->
-  <section class="bloque neon-scroll">
-    <h2>Vida</h2>
-    <p>La vida no se mide por el tiempo, sino por los momentos que te hicieron sentir vivo.</p>
-    <p>Cada día es una oportunidad para volver a empezar.</p>
-  </section>
+<section class="bloque neon">
+  <h2>Amor</h2>
+  <p>Amar también es aprender a soltar.</p>
+  <p>El amor empieza por uno mismo.</p>
+</section>
 
-  <section class="bloque neon-scroll parallax">
-    <h2>Amor</h2>
-    <p>Amar también es aprender a soltar lo que no te hace bien.</p>
-    <p>El amor verdadero empieza por uno mismo.</p>
-  </section>
+<section class="bloque neon">
+  <h2>Inspiración</h2>
+  <div class="galeria">
+    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+    <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+    <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d">
+  </div>
+</section>
 
-  <section class="bloque neon-scroll">
-    <h2>Superación</h2>
-    <p>Los errores no te definen, te enseñan.</p>
-    <p>Caer no es fracasar, quedarse en el suelo sí.</p>
-  </section>
+<script>
+const elementos=document.querySelectorAll('.neon');
 
-  <!-- ===== GALERÍA TIPO NETFLIX ===== -->
-  <section class="galeria neon-scroll">
-    <h2>Inspiración Visual</h2>
-    <div class="fila">
-      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
-      <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
-      <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d">
-      <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9">
-    </div>
-  </section>
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(x.isIntersecting) x.target.classList.add('activo');
+  });
+},{threshold:.25});
 
-</main>
+elementos.forEach(el=>obs.observe(el));
+</script>
 
-<script src="script.js"></script>
 </body>
 </html>
