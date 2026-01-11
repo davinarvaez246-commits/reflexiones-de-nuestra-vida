@@ -9,63 +9,67 @@
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 
 <style>
-  /* ===== ESTILO GENERAL ===== */
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    font-family: 'Georgia', serif;
-    background: #000;
-    color: #fff;
-    overflow-x: hidden;
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    font-family:'Georgia', serif;
+    background:#000;
+    color:#fff;
+    overflow-x:hidden;
+    transition:background 1s;
+    position:relative;
   }
-  h1,h2 { text-align:center; }
-  h1 { font-family:'Pacifico', cursive; font-size: 60px; margin:40px 0; color:#ffcc00; text-shadow:2px 2px #333; }
-  h2 { font-size:36px; margin:30px 0; text-shadow:1px 1px #222; }
+  h1,h2{text-align:center;}
+  h1{font-family:'Pacifico', cursive;font-size:60px;margin:40px 0;color:#ffcc00;text-shadow:2px 2px #333;}
+  h2{font-size:36px;margin:30px 0;text-shadow:1px 1px #222;}
 
-  /* ===== FONDO VIDEO ===== */
-  #fondo-video {
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    object-fit:cover;
-    z-index:-1;
-    filter: brightness(0.5);
+  /* ===== FONDO NEON ANIMADO ===== */
+  body::before{
+    content:"";
+    position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;
+    background: radial-gradient(circle at 20% 20%, #b19cd9, transparent 30%), radial-gradient(circle at 80% 80%, #8a2be2, transparent 30%);
+    animation: neonBg 6s infinite alternate;opacity:0.6;
+  }
+  @keyframes neonBg{
+    0%{background-position:0% 0%,100% 100%;}
+    50%{background-position:50% 50%,50% 50%;}
+    100%{background-position:100% 100%,0% 0%;}
   }
 
   /* ===== SECCIONES ===== */
-  .seccion {
-    max-width:95%;
-    padding:2.5%;
-    margin:auto;
+  .seccion{
+    max-width:90%;
+    margin:50px auto;
+    padding:25px;
     line-height:2;
     font-size:22px;
-    position: relative;
-    z-index:1;
+    border:2px solid #b19cd9;
+    border-radius:15px;
+    box-shadow:0 0 15px #b19cd9,0 0 30px #b19cd9 inset;
+    background: rgba(0,0,0,0.5);
+    position:relative;
+    transition: box-shadow 0.5s;
   }
+  .seccion:hover{box-shadow:0 0 30px #b19cd9,0 0 60px #b19cd9 inset;}
+  hr{border:0;height:1px;background:#555;margin:15px 0;}
 
-  hr { border:0; height:1px; background:#555; margin:15px 0; }
-
-  .resaltar { font-weight:bold; }
-  .vida { color:#00ffff; }
-  .amor { color:#ff69b4; }
-  .motivacion { color:#ffff00; }
-  .felicidad { color:#00ff7f; }
-  .soledad { color:#ff4500; }
-  .tristeza { color:#1e90ff; }
-  .reflexion { color:#dda0dd; }
-  .consejos { color:#ffa500; }
-  .superacion { color:#ff1493; }
-  .gratitud { color:#7fff00; }
+  .resaltar{font-weight:bold;}
+  .vida{color:#00ffff;}
+  .amor{color:#ff69b4;}
+  .motivacion{color:#ffff00;}
+  .felicidad{color:#00ff7f;}
+  .soledad{color:#ff4500;}
+  .tristeza{color:#1e90ff;}
+  .reflexion{color:#dda0dd;}
+  .consejos{color:#ffa500;}
+  .superacion{color:#ff1493;}
+  .gratitud{color:#7fff00;}
 
   /* ===== FRASES ANIMADAS ===== */
-  .fade-in {
-    opacity:0;
-    transform: translateY(30px);
-    animation: aparecer 1.2s forwards;
-  }
-  @keyframes aparecer { to { opacity:1; transform:translateY(0); } }
+  .fade-in{opacity:0;transform:translateY(30px);animation:aparecer 1.2s forwards;}
+  @keyframes aparecer{to{opacity:1;transform:translateY(0);}}
 
-  /* ===== ANIMACION NEON AL SCROLL ===== */
-  .neon {
+  /* ===== ANIMACION NEON SCROLL ===== */
+  .neon{
     text-shadow:
       0 0 5px #b19cd9,
       0 0 10px #b19cd9,
@@ -74,66 +78,36 @@
     transition: all 0.5s ease;
   }
 
-  /* ===== GALERIA ===== */
-  .galeria {
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    justify-content:center;
-    margin:50px 0;
-  }
-  .galeria img, .galeria video {
-    width:250px;
-    height:150px;
-    object-fit:cover;
-    border-radius:10px;
-    cursor:pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .galeria img:hover, .galeria video:hover { transform:scale(1.1); box-shadow:0 0 15px #b19cd9; }
-
-  /* ===== MODAL ===== */
-  #modal {
-    display:none;
-    position:fixed; top:0; left:0;
-    width:100%; height:100%;
-    background:rgba(0,0,0,0.9);
-    justify-content:center; align-items:center;
-    z-index:999;
-  }
-  #modal img, #modal video {
-    max-width:90%; max-height:90%;
-    border-radius:10px;
-  }
-
   /* ===== COMENTARIOS ===== */
-  #comentarios { margin-top:50px; }
-  #comentarios input, #comentarios button {
-    padding:15px;
-    margin:10px 0;
-    font-size:18px;
-    border-radius:10px;
-    border:none;
+  #comentarios{margin-top:50px;}
+  #comentarios input,#comentarios button{
+    padding:15px;margin:10px 0;font-size:18px;border-radius:10px;border:none;
   }
-  #comentarios button { background:#ffcc00; color:#000; cursor:pointer; font-weight:bold; }
-  #comentarios ul { list-style:none; margin-top:20px; font-size:20px; }
-  #comentarios li { margin-bottom:10px; border-bottom:1px solid #555; padding-bottom:5px; }
+  #comentarios button{background:#ffcc00;color:#000;cursor:pointer;font-weight:bold;}
+  #comentarios ul{list-style:none;margin-top:20px;font-size:20px;}
+  #comentarios li{margin-bottom:10px;border-bottom:1px solid #555;padding-bottom:5px;}
 
   /* ===== RESPONSIVE ===== */
-  @media(max-width:768px){
-    h1{ font-size:48px; }
-    h2{ font-size:28px; }
-    .galeria img, .galeria video{ width:45%; height:120px; }
+  @media(max-width:768px){h1{font-size:48px;}h2{font-size:28px;}}
+
+  /* ===== CANVAS 3D PARTICULAS NEON ===== */
+  canvas#fondo3D{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}
+
+  /* ===== LUZ QUE SIGUE EL MOUSE ===== */
+  #luzMouse{
+    position:fixed;
+    top:0;left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:-1;
   }
 </style>
 </head>
-
 <body>
 
-<!-- ===== VIDEO DE FONDO ===== -->
-<video autoplay muted loop id="fondo-video">
-  <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
-</video>
+<canvas id="fondo3D"></canvas>
+<canvas id="luzMouse"></canvas>
 
 <h1>Reflexiones de nuestra vida</h1>
 
@@ -149,17 +123,6 @@
 <div class="seccion" id="superacion"><h2 class="resaltar superacion">Superación</h2></div>
 <div class="seccion" id="gratitud"><h2 class="resaltar gratitud">Gratitud</h2></div>
 
-<!-- ===== GALERIA ===== -->
-<div class="galeria">
-  <img src="https://picsum.photos/id/1015/400/300" alt="Imagen ejemplo">
-  <img src="https://picsum.photos/id/1016/400/300" alt="Imagen ejemplo">
-  <video src="https://www.w3schools.com/html/mov_bbb.mp4" muted loop></video>
-  <video src="https://www.w3schools.com/html/movie.mp4" muted loop></video>
-</div>
-
-<!-- ===== MODAL ===== -->
-<div id="modal"></div>
-
 <!-- ===== COMENTARIOS ===== -->
 <div class="seccion" id="comentarios">
   <h2 class="resaltar">Deja tu reflexión 💭</h2>
@@ -169,18 +132,13 @@
 </div>
 
 <script>
-  /* ===== FRASES PARA CADA SECCION ===== */
-  const secciones = {
-    vida: ["La vida es un aprendizaje constante...", "Cada momento de silencio es una oportunidad...", "Aprender a valorar lo simple...", "La paciencia transforma...", "Cada día es una nueva oportunidad...", "Cada decisión cuenta...", "Disfruta el presente...", "El cambio es inevitable...", "La resiliencia nos fortalece...", "La gratitud transforma tu perspectiva...", "El tiempo es oro...", "Acepta lo que no puedes cambiar...", "Pequeños gestos crean grandes impactos...", "Sé consciente de tu respiración...", "Aprende de tus errores...", "La curiosidad abre caminos...", "La naturaleza enseña paciencia...", "Ayuda a los demás siempre...", "Sé amable contigo mismo...", "El presente es un regalo...", "El amor propio es esencial...", "Escucha antes de hablar...", "Cada risa cura...", "La humildad abre puertas...", "El perdón libera..."],
-    amor: ["El amor no se busca, se construye...", "Amar significa soltar lo que no te hace bien...", "Cada gesto tiene valor...", "El respeto es base de toda relación...", "La paciencia fortalece vínculos...", "Celebrar los logros juntos...", "Los recuerdos crean lazos...", "Cada sonrisa construye confianza...", "Aprender de los errores juntos...", "Los detalles importan más que palabras...", "La comprensión es poderosa...", "Dar sin esperar nada...", "La empatía fortalece...", "El perdón sana...", "Cada abrazo es un tesoro...", "Escucha con el corazón...", "Apoya en silencio...", "Sorprende con acciones...", "Comparte tus sueños...", "Aprende a agradecer...", "La pasión se cultiva...", "El compromiso es clave...", "Respetar diferencias...", "Disfrutar momentos juntos...", "El amor es paciencia..."],
-    motivacion: ["Cada día es una nueva oportunidad...", "Los retos nos hacen crecer...", "La disciplina diaria fortalece...", "Aprender de la experiencia...", "Confía en ti mismo...", "El esfuerzo constante vence...", "Cada meta alcanzada inspira...", "Mantente positivo...", "Sigue tus sueños...", "El fracaso es enseñanza...", "Cree en tus habilidades...", "Supera tus miedos...", "La resiliencia es clave...", "Cada acción cuenta...", "Aprende algo nuevo cada día...", "Desafía tus límites...", "Visualiza tu éxito...", "Persiste con pasión...", "Sé constante...", "Motiva a otros...", "No te rindas...", "El progreso es gradual...", "Celebra logros pequeños...", "Aprende de la crítica...", "Mantén enfoque..."],
-    felicidad: ["La felicidad está en lo simple...", "Valora cada momento...", "Comparte sonrisas...", "Disfruta la naturaleza...", "Sé agradecido...", "Ayuda a otros...", "Vive el presente...", "Aprende a soltar...", "Encuentra alegría en lo pequeño...", "Cultiva relaciones sanas...", "Ríe todos los días...", "Conecta con tu interior...", "Escucha música que te inspire...", "Practica la gratitud...", "Celebra pequeños logros...", "Haz cosas que amas...", "Sonríe sin razón...", "Rodéate de energía positiva...", "Sé amable contigo mismo...", "Disfruta el silencio...", "Observa la belleza alrededor...", "Permítete descansar...", "Recuerda momentos felices...", "Comparte con familia y amigos...", "El optimismo atrae oportunidades..."],
-    soledad: ["Aprender a estar solo es crecer...", "La soledad nos enseña a escucharnos...", "Reflexiona sobre tus emociones...", "Descubre tu interior...", "Acepta tu compañía...", "Encuentra paz en silencio...", "Fortalece tu independencia...", "El autoconocimiento comienza aquí...", "Conéctate con tus pensamientos...", "Explora tu creatividad...", "La soledad no es vacía...", "Valora tus momentos contigo...", "Escucha tu corazón...", "Medita diariamente...", "Disfruta tu propia compañía...", "Respira profundo y siente...", "Aprende a amarte...", "Organiza tus ideas...", "Conoce tus límites...", "Reflexiona sin juicio...", "Encuentra calma...", "Fortalece tu mente...", "Sé consciente de tu tiempo...", "Celebra tus logros internos...", "Acepta lo que eres..."],
-    tristeza: ["La tristeza es parte del proceso...", "Permítete sentir...", "Busca apoyo...", "Escribe tus emociones...", "Respira profundo...", "No te castigues...", "Comparte con alguien de confianza...", "Escucha música que sane...", "Camina al aire libre...", "Reflexiona sobre causas...", "Acepta tus emociones...", "Sé amable contigo mismo...", "Encuentra luz en pequeños momentos...", "Aprende de la experiencia...", "Transforma dolor en aprendizaje...", "No te aísles...", "Confía en el tiempo...", "Realiza actividades creativas...", "Permite el llanto...", "Busca motivación...", "Respeta tus procesos...", "Mantén esperanza...", "Observa tu resiliencia...", "Cambia perspectiva...", "Celebra pequeñas victorias..."],
-    reflexion: ["Reflexiona antes de actuar...", "Aprende de tus errores...", "Valora lo que tienes...", "Escucha antes de hablar...", "Medita sobre decisiones...", "Observa tu entorno...", "Pregúntate siempre el porqué...", "Sé consciente de tus actos...", "Analiza tus pensamientos...", "Aprende de los demás...", "Haz pausas en tu día...", "Prioriza lo importante...", "Acepta lo que no puedes cambiar...", "Cuestiona creencias...", "Observa patrones...", "Haz balance semanal...", "Anota tus ideas...", "Aprende del pasado...", "Celebra aprendizajes...", "Cambia lo que puedas...", "Sé agradecido...", "Comparte reflexiones...", "Escucha tus emociones...", "Valora momentos de calma...", "Sé honesto contigo mismo..."],
-    consejos: ["Escucha más de lo que hablas...", "Aprende a pedir ayuda...", "Sé agradecido...", "Cuida tu cuerpo...", "Respeta tus límites...", "Organiza tu tiempo...", "Aprende algo nuevo...", "Mantente positivo...", "Haz ejercicio regularmente...", "Conecta con la naturaleza...", "Evita compararte...", "Sé paciente...", "Practica empatía...", "Escucha consejos de sabios...", "Evita toxicidad...", "Desafía tus miedos...", "Celebra logros pequeños...", "Ayuda a otros...", "Aprende a decir no...", "Perdona errores...", "Sé constante...", "Mantén disciplina...", "Valora tu entorno...", "Prioriza la salud mental...", "Escucha tu intuición..."],
-    superacion: ["Supera tus miedos...", "Cree en ti...", "Actúa sin procrastinar...", "Aprende de fracasos...", "Busca oportunidades...", "Desafía tus límites...", "Visualiza tu éxito...", "Mantén constancia...", "Sé resiliente...", "Aprende nuevas habilidades...", "Rodéate de personas positivas...", "Enfócate en soluciones...", "Transforma obstáculos en lecciones...", "Motívate diariamente...", "Define metas claras...", "Mantén disciplina...", "Celebra logros...", "Aprende de críticas...", "Sé flexible...", "Actúa con determinación...", "Enfrenta dificultades...", "Practica gratitud...", "Persevera sin rendirte...", "Busca inspiración...", "Confía en tu potencial..."],
-    gratitud: ["Agradece cada momento...", "Valora lo que tienes...", "Aprecia pequeños detalles...", "Da gracias diariamente...", "Reconoce esfuerzos propios y ajenos...", "Sé consciente de tus bendiciones...", "Comparte gratitud con otros...", "Reflexiona sobre lo aprendido...", "Registra momentos felices...", "Observa belleza en la vida...", "Sé agradecido incluso en dificultades...", "Practica gratitud en silencio...", "Expresa gratitud con palabras...", "Celebra logros y aprendizajes...", "Valora relaciones positivas...", "Agradece tu cuerpo y salud...", "Reconoce oportunidades...", "Sé amable con otros...", "Aprende a perdonar...", "Mantén actitud positiva...", "Disfruta logros ajenos...", "Comparte experiencias felices...", "Aprecia tu hogar...", "Valora tiempo con familia...", "Celebra cada amanecer..."]
+  /* ===== FRASES ===== */
+  const secciones={
+    vida:["La vida es un aprendizaje constante...","Cada momento de silencio...","Aprender a valorar lo simple...","La paciencia transforma...","Cada día es una nueva oportunidad...","Cada decisión cuenta...","Disfruta el presente...","El cambio es inevitable...","La resiliencia nos fortalece...","La gratitud transforma...","El tiempo es oro...","Acepta lo que no puedes cambiar...","Pequeños gestos crean grandes impactos...","Sé consciente de tu respiración...","Aprende de tus errores...","La curiosidad abre caminos...","Ayuda a los demás siempre...","Sé amable contigo mismo...","El presente es un regalo...","El amor propio es esencial...","Escucha antes de hablar...","Cada risa cura...","La humildad abre puertas...","El perdón libera...","Cree en ti cada día..."],
+    amor:["El amor no se busca, se construye...","Amar significa soltar lo que no te hace bien...","Cada gesto tiene valor...","El respeto es base de toda relación...","La paciencia fortalece vínculos...","Celebrar los logros juntos...","Los recuerdos crean lazos...","Cada sonrisa construye confianza...","Aprender de los errores juntos...","Los detalles importan más que palabras...","La comprensión es poderosa...","Dar sin esperar nada...","La empatía fortalece...","El perdón sana...","Cada abrazo es un tesoro...","Escucha con el corazón...","Apoya en silencio...","Sorprende con acciones...","Comparte tus sueños...","Aprende a agradecer...","La pasión se cultiva...","El compromiso es clave...","Respetar diferencias...","Disfrutar momentos juntos...","El amor es paciencia..."],
+    motivacion:["Cada día es una nueva oportunidad...","Los retos nos hacen crecer...","La disciplina diaria fortalece...","Aprender de la experiencia...","Confía en ti mismo...","El esfuerzo constante vence...","Cada meta alcanzada inspira...","Mantente positivo...","Sigue tus sueños...","El fracaso es enseñanza...","Cree en tus habilidades...","Supera tus miedos...","La resiliencia es clave...","Cada acción cuenta...","Aprende algo nuevo cada día...","Desafía tus límites...","Visualiza tu éxito...","Persiste con pasión...","Sé constante...","Motiva a otros...","No te rindas...","El progreso es gradual...","Celebra logros pequeños...","Aprende de la crítica...","Mantén enfoque..."],
+    felicidad:["La felicidad está en lo simple...","Valora cada momento...","Comparte sonrisas...","Disfruta la naturaleza...","Sé agradecido...","Ayuda a otros...","Vive el presente...","Aprende a soltar...","Encuentra alegría en lo pequeño...","Cultiva relaciones sanas...","Ríe todos los días...","Conecta con tu interior...","Escucha música que te inspire...","Practica la gratitud...","Celebra pequeños logros...","Haz cosas que amas...","Sonríe sin razón...","Rodéate de energía positiva...","Sé amable contigo mismo...","Disfruta el silencio...","Observa la belleza alrededor...","Permítete descansar...","Recuerda momentos felices...","Comparte con familia y amigos...","El optimismo atrae oportunidades..."],
+    soledad:["Aprender a estar solo es crecer...","La soledad nos enseña a escucharnos...","Reflexiona sobre tus emociones...","Descubre tu interior...","Acepta tu compañía...","Encuentra paz en silencio...","Fortalece tu independencia...","El autoconocimiento comienza aquí...","Conéctate con tus pensamientos...","Explora tu creatividad...","La soledad no es vacía...","Valora tus momentos contigo...","Escucha tu corazón...","Medita diariamente...","Disfruta tu propia compañía...","Respira profundo y siente...","Aprende a amarte...","Organiza tus ideas...","Conoce tus límites...","Reflexiona sin juicio...","Encuentra calma...","Fortalece tu mente...","Sé consciente de tu tiempo...","Celebra tus logros internos...","Acepta lo que eres..."]
   };
 
   /* ===== MOSTRAR FRASES ===== */
@@ -195,21 +153,6 @@
       if(i<secciones[id].length-1) cont.appendChild(document.createElement("hr"));
     });
   }
-
-  /* ===== MODAL GALERIA ===== */
-  const modal=document.getElementById("modal");
-  document.querySelectorAll(".galeria img, .galeria video").forEach(el=>{
-    el.addEventListener("click",()=>{
-      modal.innerHTML="";
-      const clone=el.cloneNode(true);
-      clone.removeAttribute("class");
-      clone.removeAttribute("style");
-      if(clone.tagName=="VIDEO"){ clone.controls=true; clone.autoplay=true; }
-      modal.appendChild(clone);
-      modal.style.display="flex";
-    });
-  });
-  modal.addEventListener("click",()=>{ modal.style.display="none"; });
 
   /* ===== COMENTARIOS ===== */
   const listaComentarios=document.getElementById("listaComentarios");
@@ -238,7 +181,70 @@
     });
   },{threshold:0.1});
   document.querySelectorAll(".fade-in").forEach(p=>observer.observe(p));
+
+  /* ===== PARTICULAS 3D NEON ===== */
+  const canvas=document.getElementById("fondo3D");
+  const ctx=canvas.getContext("2d");
+  canvas.width=innerWidth;
+  canvas.height=innerHeight;
+
+  const particulas=[];
+  const numPart=150;
+  for(let i=0;i<numPart;i++){
+    particulas.push({
+      x:Math.random()*canvas.width,
+      y:Math.random()*canvas.height,
+      r:Math.random()*3+1,
+      dx:(Math.random()-0.5)*1,
+      dy:(Math.random()-0.5)*1,
+      color:`hsl(${Math.random()*360},100%,70%)`
+    });
+  }
+  function animar(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particulas.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.color;
+      ctx.shadowColor=p.color;
+      ctx.shadowBlur=20;
+      ctx.fill();
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<0||p.x>canvas.width) p.dx*=-1;
+      if(p.y<0||p.y>canvas.height) p.dy*=-1;
+    });
+    requestAnimationFrame(animar);
+  }
+  animar();
+  window.addEventListener("resize",()=>{
+    canvas.width=innerWidth;
+    canvas.height=innerHeight;
+  });
+
+  /* ===== LUZ CINEMATOGRAFICA QUE SIGUE EL MOUSE ===== */
+  const luzCanvas=document.getElementById("luzMouse");
+  const luzCtx=luzCanvas.getContext("2d");
+  luzCanvas.width=innerWidth;
+  luzCanvas.height=innerHeight;
+
+  let mouse={x:innerWidth/2,y:innerHeight/2};
+  document.addEventListener("mousemove",e=>{mouse.x=e.clientX; mouse.y=e.clientY;});
+
+  function luzAnim(){
+    luzCtx.clearRect(0,0,luzCanvas.width,luzCanvas.height);
+    let gradient=luzCtx.createRadialGradient(mouse.x,mouse.y,50,mouse.x,mouse.y,400);
+    gradient.addColorStop(0,"rgba(177,156,217,0.3)");
+    gradient.addColorStop(1,"rgba(0,0,0,0)");
+    luzCtx.fillStyle=gradient;
+    luzCtx.fillRect(0,0,luzCanvas.width,luzCanvas.height);
+    requestAnimationFrame(luzAnim);
+  }
+  luzAnim();
+  window.addEventListener("resize",()=>{
+    luzCanvas.width=innerWidth;
+    luzCanvas.height=innerHeight;
+  });
 </script>
 
 </body>
-  </html>
+</html>
