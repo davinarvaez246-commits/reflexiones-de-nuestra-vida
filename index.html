@@ -21,6 +21,7 @@ body{
   color:white;
   background:#000;
   overflow-x:hidden;
+  perspective:1200px;
 }
 
 /* FONDO ANIMADO */
@@ -32,7 +33,7 @@ body{
     radial-gradient(circle at 80% 80%, #9333ea, transparent 40%),
     #000;
   animation:mover 15s infinite alternate;
-  z-index:-2;
+  z-index:-3;
 }
 
 @keyframes mover{
@@ -44,6 +45,22 @@ body{
   position:fixed;
   inset:0;
   background:rgba(0,0,0,.6);
+  z-index:-2;
+}
+
+/* LUZ QUE SIGUE EL MOUSE */
+.luz-mouse{
+  position:fixed;
+  width:550px;
+  height:550px;
+  border-radius:50%;
+  pointer-events:none;
+  background:radial-gradient(circle,
+    rgba(168,85,247,.35),
+    rgba(168,85,247,.15),
+    transparent 65%);
+  filter:blur(80px);
+  transform:translate(-50%,-50%);
   z-index:-1;
 }
 
@@ -70,31 +87,52 @@ body{
   margin:120px auto;
   padding:40px;
   border-radius:20px;
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(10px);
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+
+  transform-style:preserve-3d;
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease;
+}
+
+/* TARJETAS FLOTANTES */
+.bloque:hover{
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.7),
+    0 0 40px var(--glow);
+}
+
+/* TEXTO */
+.bloque h2,
+.bloque p{
+  transform:translateZ(25px);
+  transition:.3s ease;
+}
+
+.bloque p:hover{
+  transform:translateZ(50px) translateX(8px);
+  text-shadow:0 0 14px var(--neon);
 }
 
 /* NEON SCROLL */
 .neon{
   opacity:0;
-  transform:translateY(60px);
-  transition:1.2s ease;
+  transform:translateY(80px) scale(.95);
+  transition:1.3s cubic-bezier(.2,.8,.2,1);
 }
 
 .neon.activo{
   opacity:1;
-  transform:translateY(0);
+  transform:translateY(0) scale(1);
   box-shadow:0 0 35px var(--glow);
   border:1px solid var(--neon);
 }
 
 @media(max-width:768px){
   .bloque{margin:80px 20px}
-}
-
-/* ESTILO DE FRASES */
-.bloque p{
-  margin:12px 0;
-  font-size:18px;
 }
 </style>
 </head>
@@ -103,6 +141,7 @@ body{
 
 <div class="fondo"></div>
 <div class="overlay"></div>
+<div class="luz-mouse"></div>
 
 <section class="hero neon">
   <h1>Reflexiones de nuestra vida</h1>
@@ -119,90 +158,118 @@ body{
   <p>Los pequeños logros construyen tu camino.</p>
   <p>Escucha tu interior con atención.</p>
   <p>Aprender de los errores fortalece.</p>
-  <p>Celebra cada avance, por pequeño que sea.</p>
-  <p>El presente es un regalo, disfrútalo.</p>
+  <p>Celebra cada avance.</p>
+  <p>El presente es un regalo.</p>
 </section>
 
 <section class="bloque neon">
   <h2>Amor</h2>
   <p>Amar también es aprender a soltar.</p>
   <p>El amor empieza por uno mismo.</p>
-  <p>La comprensión es el lenguaje más poderoso.</p>
-  <p>Los detalles dicen más que palabras.</p>
-  <p>La paciencia fortalece los vínculos.</p>
-  <p>El respeto es la base de cualquier relación.</p>
-  <p>Amar es celebrar los logros juntos.</p>
-  <p>El perdón sana más que la distancia.</p>
-  <p>Cada sonrisa construye cercanía.</p>
-  <p>Cada abrazo sincero es un tesoro.</p>
+  <p>La comprensión une.</p>
+  <p>Los detalles importan.</p>
+  <p>El respeto sostiene.</p>
+  <p>El perdón libera.</p>
+  <p>La paciencia fortalece.</p>
+  <p>Amar es acompañar.</p>
+  <p>La confianza construye.</p>
+  <p>El cariño sana.</p>
 </section>
 
 <section class="bloque neon">
   <h2>Inspiración</h2>
-  <p>Encuentra motivación en cada amanecer.</p>
-  <p>Los retos son oportunidades disfrazadas.</p>
-  <p>La disciplina diaria te guía hacia tus metas.</p>
-  <p>Aprender abre nuevas puertas.</p>
-  <p>El esfuerzo constante supera al talento sin disciplina.</p>
-  <p>Confía en ti mismo para avanzar.</p>
-  <p>Cada experiencia es un maestro silencioso.</p>
-  <p>Abraza lo desconocido con confianza.</p>
-  <p>Celebra tus pequeños logros diarios.</p>
-  <p>La resiliencia te hace más fuerte cada día.</p>
+  <p>Los retos te transforman.</p>
+  <p>La disciplina guía.</p>
+  <p>El esfuerzo vale.</p>
+  <p>Cree en ti.</p>
+  <p>Aprender abre caminos.</p>
+  <p>Todo comienza hoy.</p>
+  <p>Persiste.</p>
+  <p>Sigue.</p>
+  <p>Avanza.</p>
+  <p>Confía.</p>
 </section>
 
 <section class="bloque neon">
   <h2>Motivación</h2>
-  <p>Nunca dejes de creer en ti mismo.</p>
-  <p>Cada día es una nueva oportunidad.</p>
-  <p>Los desafíos fortalecen tu carácter.</p>
-  <p>El esfuerzo de hoy construye tu futuro.</p>
-  <p>No te rindas ante la adversidad.</p>
-  <p>Visualiza tu éxito y trabaja por él.</p>
-  <p>Cada meta alcanzada es un paso adelante.</p>
-  <p>Rodéate de energía positiva.</p>
-  <p>La perseverancia es la clave del éxito.</p>
-  <p>Confía en el proceso y sigue avanzando.</p>
+  <p>Nunca te rindas.</p>
+  <p>Tu esfuerzo cuenta.</p>
+  <p>Hoy es clave.</p>
+  <p>Hazlo posible.</p>
+  <p>Confía.</p>
+  <p>Sigue adelante.</p>
+  <p>Levántate.</p>
+  <p>Inténtalo.</p>
+  <p>Avanza.</p>
+  <p>Créelo.</p>
 </section>
 
 <section class="bloque neon">
   <h2>Consejos de la vida</h2>
-  <p>Escucha más de lo que hablas.</p>
-  <p>Cuida tu salud física y mental.</p>
-  <p>Aprende de tus errores y sigue adelante.</p>
-  <p>Valora el tiempo y a las personas que amas.</p>
-  <p>No compares tu camino con el de otros.</p>
-  <p>Actúa siempre con honestidad y respeto.</p>
-  <p>Encuentra tiempo para la introspección.</p>
-  <p>La gratitud transforma la vida.</p>
-  <p>Aprende a priorizar lo importante.</p>
-  <p>El cambio empieza desde dentro.</p>
+  <p>Escucha.</p>
+  <p>Respeta.</p>
+  <p>Agradece.</p>
+  <p>Aprende.</p>
+  <p>Cuida.</p>
+  <p>Valora.</p>
+  <p>Perdona.</p>
+  <p>Crece.</p>
+  <p>Sé honesto.</p>
+  <p>Vive.</p>
 </section>
 
 <section class="bloque neon">
   <h2>Reflexiones</h2>
-  <p>El silencio es a veces la mejor respuesta.</p>
-  <p>Cada experiencia deja una enseñanza.</p>
-  <p>No todo está bajo tu control, aprende a soltar.</p>
-  <p>Valorar el presente te da paz.</p>
-  <p>La felicidad se construye desde adentro.</p>
-  <p>Aprende a perdonar para liberarte.</p>
-  <p>La humildad abre más puertas que la fuerza.</p>
-  <p>El crecimiento personal es constante.</p>
-  <p>La paciencia transforma la perspectiva.</p>
-  <p>Escucha tu corazón, siempre tiene la razón.</p>
+  <p>El silencio enseña.</p>
+  <p>Todo pasa.</p>
+  <p>La calma guía.</p>
+  <p>La paz nace dentro.</p>
+  <p>Soltar sana.</p>
+  <p>Respira.</p>
+  <p>Confía.</p>
+  <p>Fluye.</p>
+  <p>Observa.</p>
+  <p>Siente.</p>
 </section>
 
 <script>
+/* NEON SCROLL */
 const elementos=document.querySelectorAll('.neon');
-
 const obs=new IntersectionObserver(e=>{
   e.forEach(x=>{
     if(x.isIntersecting) x.target.classList.add('activo');
   });
 },{threshold:.25});
-
 elementos.forEach(el=>obs.observe(el));
+
+/* LUZ MOUSE */
+const luz=document.querySelector('.luz-mouse');
+window.addEventListener('mousemove',e=>{
+  luz.style.left=e.clientX+'px';
+  luz.style.top=e.clientY+'px';
+});
+
+/* 3D REAL EN TARJETAS */
+document.querySelectorAll('.bloque').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=e.clientX-r.left;
+    const y=e.clientY-r.top;
+    const rx=((y-r.height/2)/(r.height/2))*-10;
+    const ry=((x-r.width/2)/(r.width/2))*10;
+    card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg) translateY(-12px)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='rotateX(0) rotateY(0)';
+  });
+});
+
+/* SCROLL TIPO APPLE */
+window.addEventListener('scroll',()=>{
+  document.querySelectorAll('.bloque').forEach(el=>{
+    el.style.transform+=` translateZ(${window.scrollY*0.05}px)`;
+  });
+});
 </script>
 
 </body>
