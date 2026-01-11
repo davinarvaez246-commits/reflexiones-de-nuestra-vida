@@ -3,67 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <title>Reflexiones de nuestra vida</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- FUENTES -->
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-
-  <!-- THREE.JS -->
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 
 <body>
 
-<!-- FONDO 3D -->
-<div id="escena3d"></div>
+<!-- ===== FONDO EN VIDEO ===== -->
+<video class="video-bg" autoplay muted loop>
+  <source src="https://cdn.coverr.co/videos/coverr-mountain-landscape-1579/1080p.mp4" type="video/mp4">
+</video>
 
-<!-- MÚSICA -->
-<audio id="musica" loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/28/audio_9b2a6b92c6.mp3" type="audio/mpeg">
-</audio>
+<div class="overlay"></div>
 
-<button id="musicBtn">🎵</button>
-<button id="themeBtn">🌙</button>
+<!-- ===== CONTENIDO ===== -->
+<main>
 
-<header class="hero reveal">
-  <h1>Reflexiones de nuestra vida</h1>
-  <p>Palabras que se sienten, pensamientos que flotan</p>
-</header>
+  <section class="hero neon-scroll">
+    <h1>Reflexiones de nuestra vida</h1>
+    <p>Un espacio para sentir, pensar y crecer</p>
+  </section>
 
-<section class="seccion reveal">
-  <h2>Vida</h2>
-  <p>La vida no se mide en tiempo, sino en momentos que te hacen sentir vivo.</p>
-  <p>Cada día es una página en blanco, no tengas miedo de escribirla.</p>
-  <p>Aprender a soltar también es una forma de crecer.</p>
-</section>
+  <!-- ===== SECCIONES ===== -->
+  <section class="bloque neon-scroll">
+    <h2>Vida</h2>
+    <p>La vida no se mide por el tiempo, sino por los momentos que te hicieron sentir vivo.</p>
+    <p>Cada día es una oportunidad para volver a empezar.</p>
+  </section>
 
-<section class="seccion reveal">
-  <h2>Amor</h2>
-  <p>Amar no es poseer, es cuidar sin atar.</p>
-  <p>El amor sano no duele, acompaña.</p>
-  <p>Quien te ama, te impulsa a ser mejor.</p>
-</section>
+  <section class="bloque neon-scroll parallax">
+    <h2>Amor</h2>
+    <p>Amar también es aprender a soltar lo que no te hace bien.</p>
+    <p>El amor verdadero empieza por uno mismo.</p>
+  </section>
 
-<section class="seccion reveal">
-  <h2>Crecimiento</h2>
-  <p>Crecer es incómodo, pero quedarse quieto duele más.</p>
-  <p>No todo llega rápido, pero todo llega a su tiempo.</p>
-  <p>Confía en el proceso.</p>
-</section>
+  <section class="bloque neon-scroll">
+    <h2>Superación</h2>
+    <p>Los errores no te definen, te enseñan.</p>
+    <p>Caer no es fracasar, quedarse en el suelo sí.</p>
+  </section>
 
-<section class="seccion comentarios reveal">
-  <h2>Deja tu reflexión 💭</h2>
-  <textarea id="inputComentario" placeholder="Escribe aquí..."></textarea>
-  <button onclick="agregarComentario()">Publicar</button>
-  <ul id="listaComentarios"></ul>
-</section>
+  <!-- ===== GALERÍA TIPO NETFLIX ===== -->
+  <section class="galeria neon-scroll">
+    <h2>Inspiración Visual</h2>
+    <div class="fila">
+      <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+      <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+      <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d">
+      <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9">
+    </div>
+  </section>
 
-<footer>
-  Creado con ❤️ por David Nz
-</footer>
+</main>
 
 <script src="script.js"></script>
 </body>
