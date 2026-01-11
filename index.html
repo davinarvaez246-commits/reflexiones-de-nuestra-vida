@@ -1,231 +1,402 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Reflexiones de nuestra vida</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflexiones de nuestra vida</title>
+    <!-- Tailwind CSS para estructura -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* --- Configuración General --- */
+        :root {
+            --neon-purple: #bc13fe;
+            --neon-blue: #0ff0fc;
+            --dark-bg: #05000a;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(188, 19, 254, 0.4);
+        }
 
-<style>
-:root{
-  --neon:#a855f7;
-  --neon2:#22d3ee;
-  --glow:rgba(168,85,247,.8);
-}
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(188, 19, 254, 0.1) 0%, transparent 25%);
+        }
 
-*{box-sizing:border-box;margin:0;padding:0}
+        /* --- Tipografía Neón --- */
+        .font-neon {
+            font-family: 'Audiowide', cursive;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-body{
-  font-family:Poppins,sans-serif;
-  color:white;
-  background:#050007;
-  overflow-x:hidden;
-}
+        .neon-text-glow {
+            color: #fff;
+            text-shadow:
+                0 0 7px #fff,
+                0 0 10px #fff,
+                0 0 21px #fff,
+                0 0 42px var(--neon-purple),
+                0 0 82px var(--neon-purple),
+                0 0 92px var(--neon-purple);
+            animation: flicker 2s infinite alternate;
+        }
 
-/* ===== FONDO CINEMATOGRÁFICO ===== */
-.fondo{
-  position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 10% 20%, #6b21a8, transparent 45%),
-    radial-gradient(circle at 90% 80%, #22d3ee, transparent 40%),
-    radial-gradient(circle at 50% 50%, #a855f7, transparent 60%),
-    #050007;
-  animation:fondoMove 20s infinite alternate;
-  z-index:-2;
-}
+        @keyframes flicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px #fff, 0 0 42px var(--neon-purple); }
+            20%, 24%, 55% { opacity: 0.8; text-shadow: none; }
+        }
 
-@keyframes fondoMove{
-  from{filter:hue-rotate(0deg)}
-  to{filter:hue-rotate(40deg)}
-}
+        /* --- Botones de Filtro --- */
+        .neon-btn {
+            background: transparent;
+            border: 1px solid var(--neon-purple);
+            color: var(--neon-purple);
+            box-shadow: 0 0 5px var(--neon-purple), inset 0 0 5px var(--neon-purple);
+            transition: 0.3s;
+        }
 
-.overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.65);
-  z-index:-1;
-}
+        .neon-btn:hover, .neon-btn.active {
+            background: var(--neon-purple);
+            color: #fff;
+            box-shadow: 0 0 20px var(--neon-purple), inset 0 0 10px var(--neon-purple);
+            border-color: #fff;
+        }
 
-/* ===== HERO ===== */
-.hero{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
+        /* --- Tarjetas (Cards) --- */
+        .quote-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-.hero h1{
-  font-size:clamp(40px,6vw,85px);
-  color:white;
-  text-shadow:0 0 25px var(--glow);
-  font-weight:600;
-}
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
 
-.hero p{
-  margin-top:15px;
-  opacity:.85;
-  max-width:600px;
-}
+        .quote-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(188, 19, 254, 0.3);
+            border-color: #fff;
+        }
 
-/* ===== SECCIONES NEON ===== */
-.seccion{
-  max-width:900px;
-  margin:120px auto;
-  padding:45px;
-  border-radius:25px;
-  position:relative;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(10px);
-}
+        .quote-card:hover::before {
+            left: 100%;
+        }
 
-/* BORDE NEON ANIMADO */
-.seccion::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:25px;
-  background:linear-gradient(120deg,var(--neon),var(--neon2),var(--neon));
-  filter:blur(8px);
-  opacity:.9;
-  z-index:-1;
-  animation:borde 6s linear infinite;
-}
+        .quote-icon {
+            color: var(--neon-purple);
+            opacity: 0.8;
+        }
 
-@keyframes borde{
-  0%{filter:hue-rotate(0deg)}
-  100%{filter:hue-rotate(360deg)}
-}
+        /* --- Categoría Badges --- */
+        .category-badge {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid;
+        }
 
-.seccion h2{
-  font-size:28px;
-  margin-bottom:25px;
-  color:#fff;
-  text-shadow:0 0 15px var(--glow);
-}
+        .cat-amor { color: #ff0055; border-color: #ff0055; box-shadow: 0 0 5px #ff0055; }
+        .cat-tristeza { color: #0ff0fc; border-color: #0ff0fc; box-shadow: 0 0 5px #0ff0fc; }
+        .cat-superacion { color: #ffee00; border-color: #ffee00; box-shadow: 0 0 5px #ffee00; }
+        .cat-vida { color: #00ff6a; border-color: #00ff6a; box-shadow: 0 0 5px #00ff6a; }
 
-.seccion p{
-  margin-bottom:14px;
-  line-height:1.7;
-  opacity:.9;
-}
+        /* --- Animación de fondo (Partículas simples) --- */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+            z-index: -1;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+        }
 
-/* ===== ANIMACIÓN SCROLL ===== */
-.neon{
-  opacity:0;
-  transform:translateY(70px);
-  transition:1.2s ease;
-}
+        /* --- Toast Notification --- */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 50;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            border: 1px solid var(--neon-purple);
+            box-shadow: 0 0 15px var(--neon-purple);
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+        }
 
-.neon.activo{
-  opacity:1;
-  transform:translateY(0);
-}
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            bottom: 50px;
+        }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .seccion{margin:80px 20px;padding:35px}
-}
-</style>
+    </style>
 </head>
+<body class="flex flex-col min-h-screen">
 
-<body>
+    <!-- Fondo de Partículas -->
+    <div id="particles-container" class="fixed inset-0 pointer-events-none"></div>
 
-<div class="fondo"></div>
-<div class="overlay"></div>
+    <!-- Header / Título Principal -->
+    <header class="pt-20 pb-10 px-4 text-center relative z-10">
+        <!-- Título Grande Neon -->
+        <h1 class="font-neon text-3xl md:text-5xl lg:text-6xl mb-6 neon-text-glow leading-tight">
+            Reflexiones de <br class="md:hidden"> nuestra vida
+        </h1>
+        
+        <!-- Frase pequeña debajo -->
+        <p class="text-gray-300 text-base md:text-lg font-light tracking-wide italic max-w-xl mx-auto border-t border-purple-500/30 pt-4">
+            "Donde el alma encuentra su voz en el silencio..."
+        </p>
+    </header>
 
-<section class="hero neon">
-  <h1>𝐑𝐞𝐟𝐥𝐞𝐱𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐧𝐮𝐞𝐬𝐭𝐫𝐚 𝐯𝐢𝐝𝐚</h1>
-  <p>Un espacio donde los pensamientos brillan incluso en la oscuridad.</p>
-</section>
+    <!-- Navegación / Filtros -->
+    <nav class="sticky top-0 z-40 bg-opacity-90 backdrop-blur-md py-4 shadow-lg border-b border-purple-900/30" style="background-color: rgba(5,0,10,0.8);">
+        <div class="container mx-auto px-4 flex flex-wrap justify-center gap-3">
+            <button onclick="filterQuotes('all')" class="neon-btn active px-5 py-1.5 rounded-full font-semibold text-sm" id="btn-all">Todas</button>
+            <button onclick="filterQuotes('amor')" class="neon-btn px-5 py-1.5 rounded-full font-semibold text-sm" id="btn-amor">Amor</button>
+            <button onclick="filterQuotes('tristeza')" class="neon-btn px-5 py-1.5 rounded-full font-semibold text-sm" id="btn-tristeza">Tristeza</button>
+            <button onclick="filterQuotes('superacion')" class="neon-btn px-5 py-1.5 rounded-full font-semibold text-sm" id="btn-superacion">Superación</button>
+            <button onclick="filterQuotes('vida')" class="neon-btn px-5 py-1.5 rounded-full font-semibold text-sm" id="btn-vida">Consejos</button>
+        </div>
+    </nav>
 
-<!-- VIDA -->
-<section class="seccion neon">
-<h2>Vida</h2>
-<p>La vida no avisa cuando va a cambiar, simplemente lo hace.</p>
-<p>Aprendí que vivir no es sobrevivir, es sentir.</p>
-<p>Cada día pesa distinto según lo que llevas dentro.</p>
-<p>La vida enseña más cuando duele.</p>
-<p>No todo se trata de llegar, sino de resistir.</p>
-<p>Vivir también es aprender a soltar.</p>
-<p>Hay días que solo existir ya es un logro.</p>
-<p>La vida no es justa, pero sigue siendo valiosa.</p>
-<p>A veces perderse es la única forma de encontrarse.</p>
-<p>La vida no se explica, se enfrenta.</p>
-</section>
+    <!-- Grid de Frases -->
+    <main class="flex-grow container mx-auto px-4 py-12 relative z-10">
+        <div id="quotes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- El contenido se inyecta con JavaScript -->
+        </div>
+        
+        <!-- Estado Vacío -->
+        <div id="empty-state" class="hidden text-center py-20">
+            <i class="fas fa-ghost text-6xl text-purple-500 mb-4 opacity-50"></i>
+            <p class="text-xl text-gray-400">No hay reflexiones aquí...</p>
+        </div>
+    </main>
 
-<!-- AMOR -->
-<section class="seccion neon">
-<h2>Amor</h2>
-<p>Amar no es necesitar, es elegir.</p>
-<p>El amor verdadero no grita, acompaña.</p>
-<p>A veces el amor duele porque fue real.</p>
-<p>No todo el que se queda ama.</p>
-<p>Amarte a ti mismo también es amor.</p>
-<p>El amor no se ruega.</p>
-<p>Quien ama cuida incluso en silencio.</p>
-<p>El amor empieza cuando no hay condiciones.</p>
-<p>No confundas apego con amor.</p>
-<p>Amar es valentía pura.</p>
-</section>
+    <!-- Footer -->
+    <footer class="py-8 text-center border-t border-purple-900/30 relative z-10 bg-black/40">
+        <p class="text-gray-500 text-sm">
+            &copy; 2024 Reflexiones de nuestra vida.
+        </p>
+    </footer>
 
-<!-- MOTIVACIÓN -->
-<section class="seccion neon">
-<h2>Motivación</h2>
-<p>Nadie vendrá a salvarte, y eso te hace fuerte.</p>
-<p>Si sigues de pie, ya estás ganando.</p>
-<p>El cansancio no significa derrota.</p>
-<p>Sigue, incluso cuando nadie aplauda.</p>
-<p>El proceso también cuenta.</p>
-<p>Un día entenderás por qué no te rendiste.</p>
-<p>Avanza lento, pero no pares.</p>
-<p>La disciplina vence a la motivación.</p>
-<p>Tu esfuerzo no es en vano.</p>
-<p>Resistir también es valentía.</p>
-</section>
+    <!-- Notificación Toast -->
+    <div id="toast"><i class="fas fa-check-circle mr-2"></i> ¡Frase copiada!</div>
 
-<!-- CONSEJOS -->
-<section class="seccion neon">
-<h2>Consejos de la vida</h2>
-<p>No expliques tu valor a quien no sabe verlo.</p>
-<p>Cuida tu paz como un tesoro.</p>
-<p>No todos merecen acceso a ti.</p>
-<p>Aprende a decir no sin culpa.</p>
-<p>Escucha más de lo que hablas.</p>
-<p>No todo es personal.</p>
-<p>La soledad también enseña.</p>
-<p>Confía en hechos, no palabras.</p>
-<p>El tiempo revela verdades.</p>
-<p>Vive a tu ritmo.</p>
-</section>
+    <script>
+        // --- DATA: Tus Frases ---
+        const quotesData = [
+            {
+                text: "El amor no reclama posesión, sino que da libertad.",
+                author: "Rabindranath Tagore",
+                category: "amor"
+            },
+            {
+                text: "No te rindas, que la vida es eso, continuar el viaje, perseguir tus sueños.",
+                author: "Mario Benedetti",
+                category: "superacion"
+            },
+            {
+                text: "La tristeza vuela en las alas del tiempo.",
+                author: "Jean de La Fontaine",
+                category: "tristeza"
+            },
+            {
+                text: "No midas tu riqueza por el dinero que tienes, mídela por aquellas cosas que tienes y que no cambiarías por dinero.",
+                author: "Paulo Coelho",
+                category: "vida"
+            },
+            {
+                text: "Amar es encontrar en la felicidad de otro tu propia felicidad.",
+                author: "Gottfried Leibniz",
+                category: "amor"
+            },
+            {
+                text: "Llorar no indica que eres débil. Desde el nacimiento, siempre ha sido una señal de que estás vivo.",
+                author: "Charlotte Brontë",
+                category: "tristeza"
+            },
+            {
+                text: "El fracaso es solo la oportunidad de comenzar de nuevo de forma más inteligente.",
+                author: "Henry Ford",
+                category: "superacion"
+            },
+            {
+                text: "Hazlo con pasión o no lo hagas.",
+                author: "Anónimo",
+                category: "vida"
+            },
+            {
+                text: "A veces ganas, a veces aprendes.",
+                author: "John Maxwell",
+                category: "superacion"
+            },
+            {
+                text: "Te quiero no por quien eres, sino por quien soy cuando estoy contigo.",
+                author: "Gabriel García Márquez",
+                category: "amor"
+            },
+             {
+                text: "Curar las heridas del alma toma tiempo, no te apresures.",
+                author: "Anónimo",
+                category: "tristeza"
+            },
+            {
+                text: "La vida es un 10% lo que te ocurre y un 90% cómo reaccionas a ello.",
+                author: "Charles R. Swindoll",
+                category: "vida"
+            }
+        ];
 
-<!-- REFLEXIONES -->
-<section class="seccion neon">
-<h2>Reflexiones</h2>
-<p>A veces el silencio dice más que mil palabras.</p>
-<p>No todo lo que brilla es felicidad.</p>
-<p>La mente también se cansa.</p>
-<p>Crecer duele, pero quedarse duele más.</p>
-<p>Hay batallas que nadie ve.</p>
-<p>Sanar no es olvidar.</p>
-<p>El pasado no define tu final.</p>
-<p>La paz interior no tiene precio.</p>
-<p>Sentir profundo no es debilidad.</p>
-<p>Todo pasa, incluso esto.</p>
-</section>
+        // --- LÓGICA DE RENDERIZADO ---
+        const grid = document.getElementById('quotes-grid');
+        const emptyState = document.getElementById('empty-state');
+        const btns = document.querySelectorAll('.neon-btn');
 
-<script>
-const elementos=document.querySelectorAll('.neon');
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>{
-    if(x.isIntersecting) x.target.classList.add('activo');
-  });
-},{threshold:.25});
-elementos.forEach(el=>obs.observe(el));
-</script>
+        function renderQuotes(filter = 'all') {
+            grid.innerHTML = '';
+            let count = 0;
 
+            quotesData.forEach(quote => {
+                if (filter === 'all' || quote.category === filter) {
+                    count++;
+                    const card = document.createElement('div');
+                    card.className = 'quote-card p-8 flex flex-col justify-between h-full cursor-pointer group';
+                    card.onclick = () => copyToClipboard(quote.text);
+                    
+                    let icon = 'fa-star';
+                    if(quote.category === 'amor') icon = 'fa-heart';
+                    if(quote.category === 'tristeza') icon = 'fa-cloud-rain';
+                    if(quote.category === 'superacion') icon = 'fa-bolt';
+                    if(quote.category === 'vida') icon = 'fa-lightbulb';
+
+                    card.innerHTML = `
+                        <div class="mb-6">
+                            <div class="flex justify-between items-start mb-4">
+                                <i class="fas fa-quote-left text-3xl quote-icon"></i>
+                                <span class="category-badge cat-${quote.category}">${quote.category}</span>
+                            </div>
+                            <p class="text-xl md:text-2xl font-light leading-relaxed text-gray-100 italic">
+                                "${quote.text}"
+                            </p>
+                        </div>
+                        <div class="flex justify-between items-end border-t border-purple-500/30 pt-4">
+                            <p class="text-sm font-neon text-purple-300 tracking-wider">
+                                — ${quote.author}
+                            </p>
+                            <span class="text-xs text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <i class="fas fa-copy"></i> Copiar
+                            </span>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                }
+            });
+
+            if (count === 0) {
+                emptyState.classList.remove('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+            }
+        }
+
+        // --- FILTRADO ---
+        function filterQuotes(category) {
+            btns.forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${category}`).classList.add('active');
+            renderQuotes(category);
+        }
+
+        // --- COPIAR AL PORTAPAPELES ---
+        function copyToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if(successful) showToast();
+            } catch (err) {
+                console.error('Error al copiar', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+
+        // --- FONDO DE PARTÍCULAS ---
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const x = Math.random() * 100;
+                const delay = Math.random() * 15;
+                const duration = 10 + Math.random() * 20;
+                const size = Math.random() * 3;
+                particle.style.left = `${x}%`;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                container.appendChild(particle);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuotes('all');
+            createParticles();
+        });
+
+    </script>
 </body>
 </html>
