@@ -1,83 +1,142 @@
-/* ===== Estilo general ===== */
-body {
+*{
+  box-sizing: border-box;
   margin: 0;
-  font-family: Georgia, serif;
-  background-color: #0e0e0e;
-  color: #e6e6e6;
-  text-align: center;
-
-  /* Animación única */
-  opacity: 0;
-  transform: translateY(25px);
-  animation: entradaSuave 2.8s ease-out forwards;
+  padding: 0;
 }
 
-/* ===== Encabezado ===== */
-header {
-  padding: 50px 20px;
+body{
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #111, #000);
+  color: white;
+  overflow-x: hidden;
+  transition: background .6s, color .6s;
 }
 
-header h1 {
-  font-size: 3em;
-  margin-bottom: 10px;
+/* ===== MODO CLARO ===== */
+body.light{
+  background: #f5f5f5;
+  color: #111;
 }
 
-header p {
-  font-size: 1.2em;
-  color: #bdbdbd;
+/* ===== ESCENA 3D ===== */
+#escena3d{
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
-/* ===== Contenido ===== */
-.contenido {
-  max-width: 95%;
-  margin: auto;
-  padding: 40px 20px;
-  line-height: 1.9;
-  font-size: 1.45em;
+canvas{
+  filter: drop-shadow(0 0 25px rgba(255,255,255,.2));
 }
 
-/* ===== Reflexiones ===== */
-.reflexion {
-  margin: 35px auto;
-}
-
-/* ===== Footer ===== */
-footer {
-  padding: 20px;
-  font-size: 0.9em;
-  color: #777;
-}
-
-/* ===== Animación única ===== */
-@keyframes entradaSuave {
-  from {
-    opacity: 0;
-    transform: translateY(25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-/* ===== ANIMACIÓN DE FRASES ===== */
-.fade-in {
-  opacity: 0;
-  transform: translateY(25px);
-  animation: aparecer 1.2s ease forwards;
-}
-
-@keyframes aparecer {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ===== SEPARADOR SUAVE ===== */
-hr {
+/* ===== BOTONES ===== */
+#musicBtn, #themeBtn{
+  position: fixed;
+  top: 20px;
+  padding: 10px 14px;
+  border-radius: 50%;
   border: none;
-  height: 1px;
-  background: linear-gradient(to right, transparent, #555, transparent);
-  margin: 25px auto;
-  width: 60%;
+  cursor: pointer;
+  font-size: 18px;
+  background: rgba(255,255,255,.15);
+  color: white;
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+#musicBtn{ right: 20px; }
+#themeBtn{ right: 70px; }
+
+/* ===== HERO ===== */
+.hero{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero h1{
+  font-family: 'Pacifico', cursive;
+  font-size: 64px;
+  color: #ffcc00;
+  text-shadow: 0 0 20px rgba(255,204,0,.4);
+}
+
+.hero p{
+  margin-top: 15px;
+  font-size: 20px;
+  opacity: .8;
+}
+
+/* ===== SECCIONES ===== */
+.seccion{
+  max-width: 1000px;
+  margin: 120px auto;
+  padding: 0 30px;
+}
+
+.seccion h2{
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: #ffcc00;
+}
+
+.seccion p{
+  font-size: 26px;
+  line-height: 2;
+  margin-bottom: 15px;
+}
+
+/* ===== COMENTARIOS ===== */
+.comentarios textarea{
+  width: 100%;
+  height: 180px;
+  font-size: 20px;
+  padding: 15px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 20px;
+}
+
+.comentarios button{
+  margin-top: 15px;
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  background: #ffcc00;
+  cursor: pointer;
+}
+
+.comentarios ul{
+  list-style: none;
+  margin-top: 25px;
+}
+
+.comentarios li{
+  font-size: 22px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.2);
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align: center;
+  padding: 40px 0;
+  opacity: .6;
+}
+
+/* ===== REVEAL SCROLL ===== */
+.reveal{
+  opacity: 0;
+  transform: translateY(60px);
+  transition: all 1s ease;
+}
+
+.reveal.active{
+  opacity: 1;
+  transform: translateY(0);
 }
