@@ -8,25 +8,16 @@
 
   <style>
     body {
-  margin: 0;
-  padding: 40px;
-  font-family: Georgia, serif;
-  color: #fff;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-
-  /* Fondo animado */
-  background: linear-gradient(
-    -45deg,
-    #000000,
-    #050b1a,
-    #0a0f2c,
-    #000000
-  );
-  background-size: 400% 400%;
-  animation: fondoNocturno 25s ease infinite;
+      margin: 0;
+      padding: 40px;
+      font-family: Georgia, serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
+    /* ===== ANIMACIÓN DE ENTRADA ===== */
     .entrada {
       opacity: 0;
       transform: translateY(40px);
@@ -53,7 +44,6 @@
       font-size: 60px;
       margin-bottom: 30px;
       color: #ffcc00;
-      text-shadow: 2px 2px #333;
       position: relative;
       z-index: 1;
     }
@@ -74,11 +64,6 @@
       border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
-      transition: transform 0.2s;
-    }
-
-    .menu button:hover {
-      transform: scale(1.1);
     }
 
     .seccion {
@@ -111,50 +96,60 @@
       }
     }
 
-    .resaltar { font-weight: bold; }
     .vida { color: #00ffff; }
     .amor { color: #ff69b4; }
     .crecimiento { color: #ffff00; }
 
-    .top-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background-color: #ffcc00;
-      color: #000;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      z-index: 2;
-    }
-
+    /* ===== COMENTARIOS ===== */
     #comentarios {
-      margin-top: 50px;
+      margin-top: 60px;
+      text-align: center;
       position: relative;
       z-index: 1;
     }
 
-    #comentarios input,
-    #comentarios button {
-      padding: 10px;
-      margin: 5px 0;
-      border-radius: 8px;
+    /* 🔥 AQUÍ ESTÁ EL CAMBIO IMPORTANTE */
+    #comentarios textarea {
+      width: 80%;        /* +40% aprox */
+      height: 150px;     /* mucho más alto */
+      padding: 18px;
+      border-radius: 14px;
       border: none;
-      font-size: 18px;
+      font-size: 22px;
+      resize: none;
+      font-family: Georgia, serif;
     }
 
     #comentarios button {
+      margin-top: 15px;
+      padding: 12px 30px;
+      border-radius: 10px;
+      border: none;
+      font-size: 20px;
       background-color: #ffcc00;
-      font-weight: bold;
+      color: #000;
       cursor: pointer;
+      font-weight: bold;
+    }
+
+    #comentarios ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 30px;
+      font-size: 28px;
+    }
+
+    #comentarios li {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #555;
+      padding-bottom: 10px;
     }
 
     footer {
       text-align: center;
-      margin-top: 50px;
+      margin-top: 60px;
       color: #ffcc00;
+      font-weight: bold;
       font-size: 18px;
       position: relative;
       z-index: 1;
@@ -168,171 +163,124 @@
 
 <div class="entrada">
 
-<h1 id="inicio">Reflexiones de nuestra vida</h1>
+  <h1>Reflexiones de nuestra vida</h1>
 
-<div class="menu">
-  <button onclick="vida.scrollIntoView()">Vida</button>
-  <button onclick="amor.scrollIntoView()">Amor</button>
-  <button onclick="crecimiento.scrollIntoView()">Crecimiento</button>
+  <div class="menu">
+    <button onclick="document.getElementById('vida').scrollIntoView()">Vida</button>
+    <button onclick="document.getElementById('amor').scrollIntoView()">Amor</button>
+    <button onclick="document.getElementById('crecimiento').scrollIntoView()">Crecimiento</button>
+  </div>
+
+  <div class="seccion" id="vida"><h2 class="vida">Vida</h2></div>
+  <div class="seccion" id="amor"><h2 class="amor">Amor</h2></div>
+  <div class="seccion" id="crecimiento"><h2 class="crecimiento">Crecimiento</h2></div>
+
+  <div class="seccion" id="comentarios">
+    <h2>Deja tu reflexión 💭</h2>
+
+    <!-- 🔥 BANDEJA GRANDE -->
+    <textarea id="inputComentario" placeholder="Escribe tu reflexión aquí..."></textarea>
+    <br>
+    <button onclick="agregarComentario()">Añadir</button>
+
+    <ul id="listaComentarios"></ul>
+  </div>
+
+  <footer>Creado con ❤️ | Reflexiona hoy, cambia mañana</footer>
+
 </div>
-
-<div class="seccion" id="vida"><h2 class="resaltar vida">Vida</h2></div>
-<div class="seccion" id="amor"><h2 class="resaltar amor">Amor</h2></div>
-<div class="seccion" id="crecimiento"><h2 class="resaltar crecimiento">Crecimiento</h2></div>
-
-<div class="seccion" id="comentarios">
-  <h2 class="resaltar">Deja tu reflexión 💭</h2>
-  <input type="text" id="inputComentario" placeholder="Escribe aquí...">
-  <button onclick="agregarComentario()">Añadir</button>
-  <ul id="listaComentarios"></ul>
-</div>
-
-<footer>Creado con ❤️ | Reflexiona hoy, cambia mañana</footer>
-
-</div>
-
-<button class="top-btn" onclick="inicio.scrollIntoView()">⬆️ Arriba</button>
 
 <script>
-/* ===== FRASES ===== */
-const frasesVida = [
-  "La vida es un aprendizaje constante.",
-  "Cada día trae una nueva oportunidad.",
-  "Vivir también es aprender a soltar.",
-  "La calma es una forma de fuerza.",
-  "La vida cambia cuando cambias tú.",
-  "No todo lo que duele es malo.",
-  "Respira, sigue, confía.",
-  "La vida no avisa, enseña.",
-  "A veces perderse es necesario.",
-  "Lo simple también es valioso.",
-  "La vida se construye paso a paso.",
-  "Aprende a escuchar el silencio.",
-  "Cada experiencia deja huella.",
-  "La paciencia transforma.",
-  "Vivir es resistir y avanzar.",
-  "No te rindas tan pronto.",
-  "Cada momento cuenta.",
-  "La vida florece con intención.",
-  "Acepta, aprende y sigue.",
-  "Vivir es un acto de valentía."
-];
+  const frasesVida = [
+    "La vida es un aprendizaje constante.",
+    "Cada día es una nueva oportunidad.",
+    "Valora lo simple.",
+    "Aprende de cada caída.",
+    "Vive con intención."
+  ];
 
-const frasesAmor = [
-  "El amor se construye, no se exige.",
-  "Amar también es soltar.",
-  "El respeto sostiene al amor.",
-  "El amor verdadero da paz.",
-  "Los detalles importan.",
-  "Amar es cuidar.",
-  "El amor no controla.",
-  "Quien ama, escucha.",
-  "Amar es estar.",
-  "El amor sana.",
-  "Amar es elegir cada día.",
-  "El amor empieza en uno mismo.",
-  "El amor no duele.",
-  "La confianza fortalece.",
-  "Amar es comprender.",
-  "El amor crece con paciencia.",
-  "Amar también es perdonar.",
-  "El amor acompaña.",
-  "El amor no ata.",
-  "Amar es libertad."
-];
+  const frasesAmor = [
+    "El amor se construye.",
+    "Amar también es soltar.",
+    "Los detalles importan.",
+    "La comprensión une.",
+    "Cada abrazo cuenta."
+  ];
 
-const frasesCrecimiento = [
-  "Crecer es salir de la comodidad.",
-  "Los errores enseñan.",
-  "La disciplina construye.",
-  "El crecimiento duele.",
-  "Avanza aunque tengas miedo.",
-  "No pares ahora.",
-  "Cada paso cuenta.",
-  "Aprender es crecer.",
-  "El cambio empieza en ti.",
-  "La constancia gana.",
-  "Crecer es insistir.",
-  "No temas fallar.",
-  "Todo proceso es válido.",
-  "El progreso es interno.",
-  "Crecer es decidir.",
-  "La incomodidad transforma.",
-  "Confía en tu proceso.",
-  "Sigue aunque cueste.",
-  "La evolución es diaria.",
-  "Crecer es responsabilidad."
-];
+  const frasesCrecimiento = [
+    "Crecer duele, pero vale.",
+    "La disciplina transforma.",
+    "Aprende de los errores.",
+    "Sé constante.",
+    "Nunca te detengas."
+  ];
 
-function mezclarArray(a){return a.sort(()=>Math.random()-0.5);}
+  function mostrarFrases(id, frases) {
+    const cont = document.getElementById(id);
+    frases.forEach((fr, i) => {
+      const p = document.createElement("p");
+      p.className = "fade-in";
+      p.style.animationDelay = `${i * 0.3}s`;
+      p.textContent = fr;
+      cont.appendChild(p);
+      cont.appendChild(document.createElement("hr"));
+    });
+  }
 
-function mostrarFrases(id, frases){
-  const c = document.getElementById(id);
-  mezclarArray([...frases]).forEach((f,i)=>{
-    const p=document.createElement("p");
-    p.className="fade-in";
-    p.style.animationDelay=`${i*0.25}s`;
-    p.textContent=`${i+1}. ${f}`;
-    c.appendChild(p);
-    if(i<frases.length-1)c.appendChild(document.createElement("hr"));
+  mostrarFrases("vida", frasesVida);
+  mostrarFrases("amor", frasesAmor);
+  mostrarFrases("crecimiento", frasesCrecimiento);
+
+  const listaComentarios = document.getElementById("listaComentarios");
+  const inputComentario = document.getElementById("inputComentario");
+
+  let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
+  comentarios.forEach(c => {
+    const li = document.createElement("li");
+    li.textContent = c;
+    listaComentarios.appendChild(li);
   });
-}
 
-mostrarFrases("vida",frasesVida);
-mostrarFrases("amor",frasesAmor);
-mostrarFrases("crecimiento",frasesCrecimiento);
+  function agregarComentario() {
+    const texto = inputComentario.value.trim();
+    if (!texto) return;
+    comentarios.push(texto);
+    localStorage.setItem("comentarios", JSON.stringify(comentarios));
+    const li = document.createElement("li");
+    li.textContent = texto;
+    listaComentarios.appendChild(li);
+    inputComentario.value = "";
+  }
 
-/* ===== COMENTARIOS ===== */
-const lista=document.getElementById("listaComentarios");
-const input=document.getElementById("inputComentario");
-let comentarios=JSON.parse(localStorage.getItem("comentarios"))||[];
+  const canvas = document.getElementById("fondo");
+  const ctx = canvas.getContext("2d");
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
 
-comentarios.forEach(t=>{
-  const li=document.createElement("li");
-  li.textContent=t;
-  lista.appendChild(li);
-});
+  const particulas = [];
+  for (let i = 0; i < 80; i++) {
+    particulas.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
+  }
 
-function agregarComentario(){
-  if(!input.value.trim())return;
-  comentarios.push(input.value);
-  localStorage.setItem("comentarios",JSON.stringify(comentarios));
-  const li=document.createElement("li");
-  li.textContent=input.value;
-  lista.appendChild(li);
-  input.value="";
-}
-
-/* ===== PARTÍCULAS ===== */
-const canvas=document.getElementById("fondo");
-const ctx=canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
-const particulas=[...Array(80)].map(()=>({
-  x:Math.random()*canvas.width,
-  y:Math.random()*canvas.height,
-  r:Math.random()*2+1,
-  dx:(Math.random()-0.5)*0.5,
-  dy:(Math.random()-0.5)*0.5
-}));
-
-function animar(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particulas.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(255,255,255,.6)";
-    ctx.fill();
-    p.x+=p.dx; p.y+=p.dy;
-  });
-  requestAnimationFrame(animar);
-}
-animar();
-
-addEventListener("resize",()=>{
-  canvas.width=innerWidth;
-  canvas.height=innerHeight;
-});
+  function animar() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particulas.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(255,255,255,0.6)";
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+    });
+    requestAnimationFrame(animar);
+  }
+  animar();
 </script>
 
 </body>
