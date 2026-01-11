@@ -5,65 +5,50 @@
 <title>Reflexiones de nuestra vida</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --neon:#a855f7;
-  --glow:rgba(168,85,247,.7);
+  --neon2:#22d3ee;
+  --glow:rgba(168,85,247,.8);
 }
 
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  margin:0;
   font-family:Poppins,sans-serif;
   color:white;
-  background:#000;
+  background:#050007;
   overflow-x:hidden;
-  perspective:1200px; /* 🔥 PERSPECTIVA GLOBAL */
 }
 
-/* FONDO ANIMADO */
+/* ===== FONDO CINEMATOGRÁFICO ===== */
 .fondo{
   position:fixed;
   inset:0;
   background:
-    radial-gradient(circle at 20% 20%, #6b21a8, transparent 40%),
-    radial-gradient(circle at 80% 80%, #9333ea, transparent 40%),
-    #000;
-  animation:mover 15s infinite alternate;
-  z-index:-3;
+    radial-gradient(circle at 10% 20%, #6b21a8, transparent 45%),
+    radial-gradient(circle at 90% 80%, #22d3ee, transparent 40%),
+    radial-gradient(circle at 50% 50%, #a855f7, transparent 60%),
+    #050007;
+  animation:fondoMove 20s infinite alternate;
+  z-index:-2;
 }
 
-@keyframes mover{
+@keyframes fondoMove{
   from{filter:hue-rotate(0deg)}
-  to{filter:hue-rotate(30deg)}
+  to{filter:hue-rotate(40deg)}
 }
 
 .overlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.6);
-  z-index:-2;
-}
-
-/* LUZ MOUSE */
-.luz-mouse{
-  position:fixed;
-  width:600px;
-  height:600px;
-  border-radius:50%;
-  pointer-events:none;
-  background:radial-gradient(circle,
-    rgba(168,85,247,.35),
-    transparent 60%);
-  filter:blur(80px);
-  transform:translate(-50%,-50%);
+  background:rgba(0,0,0,.65);
   z-index:-1;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
   min-height:100vh;
   display:flex;
@@ -73,58 +58,76 @@ body{
   text-align:center;
 }
 
-/* BLOQUES */
-.bloque{
+.hero h1{
+  font-size:clamp(40px,6vw,85px);
+  color:white;
+  text-shadow:0 0 25px var(--glow);
+  font-weight:600;
+}
+
+.hero p{
+  margin-top:15px;
+  opacity:.85;
+  max-width:600px;
+}
+
+/* ===== SECCIONES NEON ===== */
+.seccion{
   max-width:900px;
   margin:120px auto;
-  padding:40px;
-  border-radius:20px;
+  padding:45px;
+  border-radius:25px;
+  position:relative;
+  background:rgba(0,0,0,.45);
   backdrop-filter:blur(10px);
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-
-  transform-style:preserve-3d;
-  transition:
-    transform .15s ease,
-    box-shadow .3s ease;
 }
 
-/* TARJETA FLOTANTE */
-.bloque:hover{
-  box-shadow:
-    0 30px 80px rgba(0,0,0,.7),
-    0 0 40px var(--glow);
+/* BORDE NEON ANIMADO */
+.seccion::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:25px;
+  background:linear-gradient(120deg,var(--neon),var(--neon2),var(--neon));
+  filter:blur(8px);
+  opacity:.9;
+  z-index:-1;
+  animation:borde 6s linear infinite;
 }
 
-/* FRASES */
-.bloque p{
-  font-size:18px;
-  transform:translateZ(30px);
-  transition:.3s ease;
+@keyframes borde{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(360deg)}
 }
 
-.bloque p:hover{
-  transform:translateZ(60px);
-  text-shadow:0 0 15px var(--neon);
+.seccion h2{
+  font-size:28px;
+  margin-bottom:25px;
+  color:#fff;
+  text-shadow:0 0 15px var(--glow);
 }
 
-/* NEON SCROLL */
+.seccion p{
+  margin-bottom:14px;
+  line-height:1.7;
+  opacity:.9;
+}
+
+/* ===== ANIMACIÓN SCROLL ===== */
 .neon{
   opacity:0;
-  transform:translateY(80px) scale(.95);
-  transition:1.2s cubic-bezier(.2,.8,.2,1);
+  transform:translateY(70px);
+  transition:1.2s ease;
 }
 
 .neon.activo{
   opacity:1;
-  transform:translateY(0) scale(1);
-  border:1px solid var(--neon);
-  box-shadow:0 0 30px var(--glow);
+  transform:translateY(0);
 }
 
+/* ===== RESPONSIVE ===== */
 @media(max-width:768px){
-  .bloque{margin:80px 20px}
+  .seccion{margin:80px 20px;padding:35px}
 }
 </style>
 </head>
@@ -133,31 +136,88 @@ body{
 
 <div class="fondo"></div>
 <div class="overlay"></div>
-<div class="luz-mouse"></div>
 
 <section class="hero neon">
-  <h1>Reflexiones de nuestra vida</h1>
-  <p>Un espacio para sentir, pensar y crecer</p>
+  <h1>𝐑𝐞𝐟𝐥𝐞𝐱𝐢𝐨𝐧𝐞𝐬 𝐝𝐞 𝐧𝐮𝐞𝐬𝐭𝐫𝐚 𝐯𝐢𝐝𝐚</h1>
+  <p>Un espacio donde los pensamientos brillan incluso en la oscuridad.</p>
 </section>
 
-<section class="bloque neon">
-  <h2>Vida</h2>
-  <p>La vida no se mide en tiempo, sino en momentos.</p>
-  <p>Cada día es una nueva oportunidad.</p>
-  <p>Aprecia lo simple y lo importante.</p>
-  <p>La paciencia es tu mejor guía.</p>
-  <p>Cada caída enseña a levantarse.</p>
-  <p>Los pequeños logros construyen tu camino.</p>
-  <p>Escucha tu interior.</p>
-  <p>Aprender fortalece.</p>
-  <p>Celebra cada avance.</p>
-  <p>El presente es un regalo.</p>
+<!-- VIDA -->
+<section class="seccion neon">
+<h2>Vida</h2>
+<p>La vida no avisa cuando va a cambiar, simplemente lo hace.</p>
+<p>Aprendí que vivir no es sobrevivir, es sentir.</p>
+<p>Cada día pesa distinto según lo que llevas dentro.</p>
+<p>La vida enseña más cuando duele.</p>
+<p>No todo se trata de llegar, sino de resistir.</p>
+<p>Vivir también es aprender a soltar.</p>
+<p>Hay días que solo existir ya es un logro.</p>
+<p>La vida no es justa, pero sigue siendo valiosa.</p>
+<p>A veces perderse es la única forma de encontrarse.</p>
+<p>La vida no se explica, se enfrenta.</p>
 </section>
 
-<!-- (resto de secciones intactas como las tuyas) -->
+<!-- AMOR -->
+<section class="seccion neon">
+<h2>Amor</h2>
+<p>Amar no es necesitar, es elegir.</p>
+<p>El amor verdadero no grita, acompaña.</p>
+<p>A veces el amor duele porque fue real.</p>
+<p>No todo el que se queda ama.</p>
+<p>Amarte a ti mismo también es amor.</p>
+<p>El amor no se ruega.</p>
+<p>Quien ama cuida incluso en silencio.</p>
+<p>El amor empieza cuando no hay condiciones.</p>
+<p>No confundas apego con amor.</p>
+<p>Amar es valentía pura.</p>
+</section>
+
+<!-- MOTIVACIÓN -->
+<section class="seccion neon">
+<h2>Motivación</h2>
+<p>Nadie vendrá a salvarte, y eso te hace fuerte.</p>
+<p>Si sigues de pie, ya estás ganando.</p>
+<p>El cansancio no significa derrota.</p>
+<p>Sigue, incluso cuando nadie aplauda.</p>
+<p>El proceso también cuenta.</p>
+<p>Un día entenderás por qué no te rendiste.</p>
+<p>Avanza lento, pero no pares.</p>
+<p>La disciplina vence a la motivación.</p>
+<p>Tu esfuerzo no es en vano.</p>
+<p>Resistir también es valentía.</p>
+</section>
+
+<!-- CONSEJOS -->
+<section class="seccion neon">
+<h2>Consejos de la vida</h2>
+<p>No expliques tu valor a quien no sabe verlo.</p>
+<p>Cuida tu paz como un tesoro.</p>
+<p>No todos merecen acceso a ti.</p>
+<p>Aprende a decir no sin culpa.</p>
+<p>Escucha más de lo que hablas.</p>
+<p>No todo es personal.</p>
+<p>La soledad también enseña.</p>
+<p>Confía en hechos, no palabras.</p>
+<p>El tiempo revela verdades.</p>
+<p>Vive a tu ritmo.</p>
+</section>
+
+<!-- REFLEXIONES -->
+<section class="seccion neon">
+<h2>Reflexiones</h2>
+<p>A veces el silencio dice más que mil palabras.</p>
+<p>No todo lo que brilla es felicidad.</p>
+<p>La mente también se cansa.</p>
+<p>Crecer duele, pero quedarse duele más.</p>
+<p>Hay batallas que nadie ve.</p>
+<p>Sanar no es olvidar.</p>
+<p>El pasado no define tu final.</p>
+<p>La paz interior no tiene precio.</p>
+<p>Sentir profundo no es debilidad.</p>
+<p>Todo pasa, incluso esto.</p>
+</section>
 
 <script>
-/* SCROLL NEON */
 const elementos=document.querySelectorAll('.neon');
 const obs=new IntersectionObserver(e=>{
   e.forEach(x=>{
@@ -165,35 +225,6 @@ const obs=new IntersectionObserver(e=>{
   });
 },{threshold:.25});
 elementos.forEach(el=>obs.observe(el));
-
-/* LUZ MOUSE */
-const luz=document.querySelector('.luz-mouse');
-window.addEventListener('mousemove',e=>{
-  luz.style.left=e.clientX+'px';
-  luz.style.top=e.clientY+'px';
-});
-
-/* 🔥 EFECTO 3D REAL CON EL MOUSE */
-document.querySelectorAll('.bloque').forEach(card=>{
-  card.addEventListener('mousemove',e=>{
-    const rect=card.getBoundingClientRect();
-    const x=e.clientX-rect.left;
-    const y=e.clientY-rect.top;
-
-    const centerX=rect.width/2;
-    const centerY=rect.height/2;
-
-    const rotateX=((y-centerY)/centerY)*-10;
-    const rotateY=((x-centerX)/centerX)*10;
-
-    card.style.transform=
-      `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
-  });
-
-  card.addEventListener('mouseleave',()=>{
-    card.style.transform='rotateX(0) rotateY(0) translateZ(0)';
-  });
-});
 </script>
 
 </body>
