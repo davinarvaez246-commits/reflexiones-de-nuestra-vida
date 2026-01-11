@@ -1,286 +1,270 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Reflexiones de nuestra vida</title>
+<meta charset="UTF-8">
+<title>Reflexiones de nuestra vida</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      margin: 0;
-      padding: 40px;
-      font-family: Georgia, serif;
-      background-color: #000;
-      color: #fff;
-      overflow-x: hidden;
-      scroll-behavior: smooth;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-    /* ===== ANIMACIÓN DE ENTRADA ===== */
-    .entrada {
-      opacity: 0;
-      transform: translateY(40px);
-      animation: entradaSuave 2.2s ease forwards;
-    }
+body{
+  font-family:'Poppins',sans-serif;
+  background:#000;
+  color:#fff;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+}
 
-    @keyframes entradaSuave {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+/* ===== FONDO ANIMADO ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+}
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 0;
-    }
+.glow{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at center, rgba(255,204,0,.08), transparent 60%);
+  animation:pulse 6s infinite alternate;
+  z-index:-1;
+}
 
-    h1 {
-      text-align: center;
-      font-family: 'Pacifico', cursive;
-      font-size: 60px;
-      margin-bottom: 30px;
-      color: #ffcc00;
-      position: relative;
-      z-index: 1;
-    }
+@keyframes pulse{
+  from{opacity:.3}
+  to{opacity:.7}
+}
 
-    .menu {
-      text-align: center;
-      margin-bottom: 50px;
-      position: relative;
-      z-index: 1;
-    }
+/* ===== HERO CINEMATOGRÁFICO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  animation:heroIn 2.5s ease forwards;
+}
 
-    .menu button {
-      background-color: #ffcc00;
-      color: #000;
-      border: none;
-      padding: 10px 20px;
-      margin: 0 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+@keyframes heroIn{
+  from{opacity:0;transform:scale(1.1)}
+  to{opacity:1;transform:scale(1)}
+}
 
-    .seccion {
-      max-width: 95%;
-      padding: 0 2.5%;
-      margin: auto;
-      line-height: 2.2;
-      font-size: 32px;
-      position: relative;
-      z-index: 1;
-    }
+.hero h1{
+  font-family:'Pacifico',cursive;
+  font-size:4.5rem;
+  color:#ffcc00;
+  text-shadow:0 0 30px rgba(255,204,0,.6);
+  margin-bottom:20px;
+}
 
-    hr {
-      border: 0;
-      height: 1px;
-      background: #555;
-      margin: 20px 0;
-    }
+.hero p{
+  max-width:700px;
+  font-size:1.4rem;
+  opacity:.85;
+}
 
-    .fade-in {
-      opacity: 0;
-      transform: translateY(25px);
-      animation: aparecer 1.2s ease forwards;
-    }
+/* ===== SECCIONES ===== */
+.seccion{
+  max-width:1100px;
+  margin:120px auto;
+  padding:50px;
+  border-radius:25px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(18px);
+  box-shadow:0 25px 80px rgba(0,0,0,.6);
+  opacity:0;
+  transform:translateY(80px);
+  transition:all 1.4s ease;
+}
 
-    @keyframes aparecer {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+.seccion.visible{
+  opacity:1;
+  transform:translateY(0);
+}
 
-    .vida { color: #00ffff; }
-    .amor { color: #ff69b4; }
-    .crecimiento { color: #ffff00; }
+.seccion h2{
+  font-size:3rem;
+  margin-bottom:30px;
+}
 
-    /* ===== COMENTARIOS ===== */
-    #comentarios {
-      margin-top: 60px;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
+.vida{color:#00ffff}
+.amor{color:#ff69b4}
+.crecimiento{color:#ffe066}
 
-    /* 🔥 AQUÍ ESTÁ EL CAMBIO IMPORTANTE */
-    #comentarios textarea {
-      width: 80%;        /* +40% aprox */
-      height: 150px;     /* mucho más alto */
-      padding: 18px;
-      border-radius: 14px;
-      border: none;
-      font-size: 22px;
-      resize: none;
-      font-family: Georgia, serif;
-    }
+.seccion p{
+  font-size:1.9rem;
+  line-height:2.2;
+  margin-bottom:22px;
+  animation:respirar 6s ease-in-out infinite;
+}
 
-    #comentarios button {
-      margin-top: 15px;
-      padding: 12px 30px;
-      border-radius: 10px;
-      border: none;
-      font-size: 20px;
-      background-color: #ffcc00;
-      color: #000;
-      cursor: pointer;
-      font-weight: bold;
-    }
+@keyframes respirar{
+  0%,100%{opacity:.85}
+  50%{opacity:1}
+}
 
-    #comentarios ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 30px;
-      font-size: 28px;
-    }
+/* ===== IMÁGENES DECORATIVAS ===== */
+.img-ref{
+  width:100%;
+  max-height:420px;
+  object-fit:cover;
+  border-radius:18px;
+  margin:35px 0;
+  filter:brightness(.85) contrast(1.05);
+}
 
-    #comentarios li {
-      margin-bottom: 15px;
-      border-bottom: 1px solid #555;
-      padding-bottom: 10px;
-    }
+/* ===== COMENTARIOS ===== */
+#comentarios textarea{
+  width:100%;
+  height:200px;
+  padding:20px;
+  border-radius:16px;
+  border:none;
+  font-size:22px;
+  resize:none;
+}
 
-    footer {
-      text-align: center;
-      margin-top: 60px;
-      color: #ffcc00;
-      font-weight: bold;
-      font-size: 18px;
-      position: relative;
-      z-index: 1;
-    }
-  </style>
+#comentarios button{
+  margin-top:20px;
+  padding:14px 40px;
+  font-size:20px;
+  font-weight:bold;
+  border:none;
+  border-radius:14px;
+  background:#ffcc00;
+  color:#000;
+  cursor:pointer;
+  transition:.3s;
+}
+
+#comentarios button:hover{
+  transform:scale(1.1);
+}
+
+#comentarios ul{
+  list-style:none;
+  margin-top:35px;
+}
+
+#comentarios li{
+  margin-bottom:18px;
+  font-size:1.6rem;
+  opacity:.85;
+  border-bottom:1px solid rgba(255,255,255,.2);
+  padding-bottom:10px;
+}
+
+/* ===== FOOTER ===== */
+footer{
+  text-align:center;
+  padding:70px 20px;
+  font-size:1.1rem;
+  opacity:.8;
+}
+</style>
 </head>
 
 <body>
 
 <canvas id="fondo"></canvas>
+<div class="glow"></div>
 
-<div class="entrada">
-
+<section class="hero">
   <h1>Reflexiones de nuestra vida</h1>
+  <p>Un lugar donde el tiempo se detiene y el alma respira.</p>
+</section>
 
-  <div class="menu">
-    <button onclick="document.getElementById('vida').scrollIntoView()">Vida</button>
-    <button onclick="document.getElementById('amor').scrollIntoView()">Amor</button>
-    <button onclick="document.getElementById('crecimiento').scrollIntoView()">Crecimiento</button>
-  </div>
+<section class="seccion reveal vida">
+  <h2>Vida</h2>
+  <img class="img-ref" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+  <p>La vida no se mide en años, sino en momentos que te transforman.</p>
+  <p>Cada paso, incluso el más lento, sigue siendo avance.</p>
+</section>
 
-  <div class="seccion" id="vida"><h2 class="vida">Vida</h2></div>
-  <div class="seccion" id="amor"><h2 class="amor">Amor</h2></div>
-  <div class="seccion" id="crecimiento"><h2 class="crecimiento">Crecimiento</h2></div>
+<section class="seccion reveal amor">
+  <h2>Amor</h2>
+  <img class="img-ref" src="https://images.unsplash.com/photo-1492724441997-5dc865305da7">
+  <p>El amor no se exige, se cultiva con paciencia.</p>
+  <p>Amar también es aprender a quedarse.</p>
+</section>
 
-  <div class="seccion" id="comentarios">
-    <h2>Deja tu reflexión 💭</h2>
+<section class="seccion reveal crecimiento">
+  <h2>Crecimiento</h2>
+  <img class="img-ref" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+  <p>Crecemos cuando dejamos de huir de lo que sentimos.</p>
+  <p>Sanar también es una forma de valentía.</p>
+</section>
 
-    <!-- 🔥 BANDEJA GRANDE -->
-    <textarea id="inputComentario" placeholder="Escribe tu reflexión aquí..."></textarea>
-    <br>
-    <button onclick="agregarComentario()">Añadir</button>
+<section class="seccion reveal" id="comentarios">
+  <h2>Deja tu reflexión 💭</h2>
+  <textarea id="inputComentario" placeholder="Escribe lo que sientes…"></textarea>
+  <button onclick="agregarComentario()">Publicar</button>
+  <ul id="listaComentarios"></ul>
+</section>
 
-    <ul id="listaComentarios"></ul>
-  </div>
-
-  <footer>Creado con ❤️ | Reflexiona hoy, cambia mañana</footer>
-
-</div>
+<footer>
+  Creado con ❤️ por <b>David Nz</b> — Reflexiona hoy, cambia mañana
+</footer>
 
 <script>
-  const frasesVida = [
-    "La vida es un aprendizaje constante.",
-    "Cada día es una nueva oportunidad.",
-    "Valora lo simple.",
-    "Aprende de cada caída.",
-    "Vive con intención."
-  ];
+/* ===== PARTICULAS ===== */
+const canvas=document.getElementById("fondo"),ctx=canvas.getContext("2d");
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+resize();addEventListener("resize",resize);
 
-  const frasesAmor = [
-    "El amor se construye.",
-    "Amar también es soltar.",
-    "Los detalles importan.",
-    "La comprensión une.",
-    "Cada abrazo cuenta."
-  ];
+let parts=[...Array(100)].map(()=>({
+  x:Math.random()*canvas.width,
+  y:Math.random()*canvas.height,
+  r:Math.random()*2+1,
+  dx:(Math.random()-.5)*.4,
+  dy:(Math.random()-.5)*.4
+}));
 
-  const frasesCrecimiento = [
-    "Crecer duele, pero vale.",
-    "La disciplina transforma.",
-    "Aprende de los errores.",
-    "Sé constante.",
-    "Nunca te detengas."
-  ];
-
-  function mostrarFrases(id, frases) {
-    const cont = document.getElementById(id);
-    frases.forEach((fr, i) => {
-      const p = document.createElement("p");
-      p.className = "fade-in";
-      p.style.animationDelay = `${i * 0.3}s`;
-      p.textContent = fr;
-      cont.appendChild(p);
-      cont.appendChild(document.createElement("hr"));
-    });
-  }
-
-  mostrarFrases("vida", frasesVida);
-  mostrarFrases("amor", frasesAmor);
-  mostrarFrases("crecimiento", frasesCrecimiento);
-
-  const listaComentarios = document.getElementById("listaComentarios");
-  const inputComentario = document.getElementById("inputComentario");
-
-  let comentarios = JSON.parse(localStorage.getItem("comentarios")) || [];
-  comentarios.forEach(c => {
-    const li = document.createElement("li");
-    li.textContent = c;
-    listaComentarios.appendChild(li);
+function anim(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  parts.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle="rgba(255,255,255,.6)";
+    ctx.fill();
+    p.x+=p.dx;p.y+=p.dy;
+    if(p.x<0||p.x>canvas.width)p.dx*=-1;
+    if(p.y<0||p.y>canvas.height)p.dy*=-1;
   });
+  requestAnimationFrame(anim);
+}
+anim();
 
-  function agregarComentario() {
-    const texto = inputComentario.value.trim();
-    if (!texto) return;
-    comentarios.push(texto);
-    localStorage.setItem("comentarios", JSON.stringify(comentarios));
-    const li = document.createElement("li");
-    li.textContent = texto;
-    listaComentarios.appendChild(li);
-    inputComentario.value = "";
-  }
+/* ===== SCROLL REVEAL ===== */
+const obs=new IntersectionObserver(e=>{
+  e.forEach(i=>i.isIntersecting&&i.target.classList.add("visible"))
+},{threshold:.25});
+document.querySelectorAll(".reveal").forEach(el=>obs.observe(el));
 
-  const canvas = document.getElementById("fondo");
-  const ctx = canvas.getContext("2d");
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
+/* ===== COMENTARIOS ===== */
+const lista=document.getElementById("listaComentarios");
+const input=document.getElementById("inputComentario");
+let comentarios=JSON.parse(localStorage.getItem("comentarios"))||[];
 
-  const particulas = [];
-  for (let i = 0; i < 80; i++) {
-    particulas.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 2 + 1,
-      dx: (Math.random() - 0.5) * 0.5,
-      dy: (Math.random() - 0.5) * 0.5
-    });
-  }
+comentarios.forEach(t=>{
+  let li=document.createElement("li");
+  li.textContent=t;
+  lista.appendChild(li);
+});
 
-  function animar() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particulas.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(255,255,255,0.6)";
-      ctx.fill();
-      p.x += p.dx;
-      p.y += p.dy;
-    });
-    requestAnimationFrame(animar);
-  }
-  animar();
+function agregarComentario(){
+  if(!input.value.trim())return;
+  comentarios.push(input.value);
+  localStorage.setItem("comentarios",JSON.stringify(comentarios));
+  let li=document.createElement("li");
+  li.textContent=input.value;
+  lista.appendChild(li);
+  input.value="";
+}
 </script>
 
 </body>
